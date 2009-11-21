@@ -15,20 +15,38 @@ name: Dist-Zilla-Plugin-Git
 provides:
   Dist::Zilla::Plugin::Git:
     file: lib/Dist/Zilla/Plugin/Git.pm
-    version: 1.093240
+    version: 1.093250
+  Dist::Zilla::Plugin::Git::Check:
+    file: lib/Dist/Zilla/Plugin/Git/Check.pm
+    version: 1.093250
+  Dist::Zilla::Plugin::Git::Commit:
+    file: lib/Dist/Zilla/Plugin/Git/Commit.pm
+    version: 1.093250
+  Dist::Zilla::Plugin::Git::Push:
+    file: lib/Dist/Zilla/Plugin/Git/Push.pm
+    version: 1.093250
+  Dist::Zilla::Plugin::Git::Tag:
+    file: lib/Dist/Zilla/Plugin/Git/Tag.pm
+    version: 1.093250
+  Dist::Zilla::PluginBundle::Git:
+    file: lib/Dist/Zilla/PluginBundle/Git.pm
+    version: 1.093250
 requires:
   Cwd: 0
   Dist::Zilla::Role::AfterRelease: 0
   Dist::Zilla::Role::BeforeRelease: 0
+  Dist::Zilla::Role::PluginBundle: 0
   English: 0
   ExtUtils::MakeMaker: 0
   File::Find: 0
+  File::Path: 0
   File::Spec::Functions: 0
   File::Temp: 0
   Git::Wrapper: 0
   IPC::Open3: 0
   Module::Build: 0
   Moose: 0
+  Moose::Autobox: 0
   MooseX::Has::Sugar: 0
   MooseX::Types::Moose: 0
   Symbol: 0
@@ -38,4 +56,4 @@ resources:
   MailingList: http://www.listbox.com/subscribe/?list_id=139292
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-Git/
   repository: http://github.com/jquelin/dist-zilla-plugin-git
-version: 1.093240
+version: 1.093250
