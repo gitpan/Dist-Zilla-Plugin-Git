@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::PluginBundle::Git;
-our $VERSION = '1.093250';
+our $VERSION = '1.093260';
 
 
 # ABSTRACT: all git plugins in one go
@@ -51,7 +51,7 @@ Dist::Zilla::PluginBundle::Git - all git plugins in one go
 
 =head1 VERSION
 
-version 1.093250
+version 1.093260
 
 =head1 SYNOPSIS
 

@@ -6,7 +6,7 @@ build_requires:
   Module::Build: 0.35
 configure_requires:
   Module::Build: 0.35
-generated_by: 'Dist::Zilla version 1.093220'
+generated_by: 'Dist::Zilla version 1.093250'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,24 +15,25 @@ name: Dist-Zilla-Plugin-Git
 provides:
   Dist::Zilla::Plugin::Git:
     file: lib/Dist/Zilla/Plugin/Git.pm
-    version: 1.093250
+    version: 1.093260
   Dist::Zilla::Plugin::Git::Check:
     file: lib/Dist/Zilla/Plugin/Git/Check.pm
-    version: 1.093250
+    version: 1.093260
   Dist::Zilla::Plugin::Git::Commit:
     file: lib/Dist/Zilla/Plugin/Git/Commit.pm
-    version: 1.093250
+    version: 1.093260
   Dist::Zilla::Plugin::Git::Push:
     file: lib/Dist/Zilla/Plugin/Git/Push.pm
-    version: 1.093250
+    version: 1.093260
   Dist::Zilla::Plugin::Git::Tag:
     file: lib/Dist/Zilla/Plugin/Git/Tag.pm
-    version: 1.093250
+    version: 1.093260
   Dist::Zilla::PluginBundle::Git:
     file: lib/Dist/Zilla/PluginBundle/Git.pm
-    version: 1.093250
+    version: 1.093260
 requires:
   Cwd: 0
+  Dist::Zilla: 1.093250
   Dist::Zilla::Role::AfterRelease: 0
   Dist::Zilla::Role::BeforeRelease: 0
   Dist::Zilla::Role::PluginBundle: 0
@@ -50,10 +51,11 @@ requires:
   MooseX::Has::Sugar: 0
   MooseX::Types::Moose: 0
   Symbol: 0
+  Test::Exception: 0
   Test::More: 0
   perl: 5.008
 resources:
   MailingList: http://www.listbox.com/subscribe/?list_id=139292
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-Git/
   repository: http://github.com/jquelin/dist-zilla-plugin-git
-version: 1.093250
+version: 1.093260
