@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
-our $VERSION = '1.093260';
+our $VERSION = '1.093300';
 
 
 # ABSTRACT: commit dist.ini and changelog
@@ -72,7 +72,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dist.ini and changelog
 
 =head1 VERSION
 
-version 1.093260
+version 1.093300
 
 =head1 SYNOPSIS
 
