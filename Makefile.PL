@@ -11,7 +11,7 @@ WriteMakefile(
   NAME      => 'Dist::Zilla::Plugin::Git',
   AUTHOR    => "Jerome\ Quelin",
   ABSTRACT  => "update\ your\ git\ repository\ after\ release",
-  VERSION   => '1.093300',
+  VERSION   => '1.093410',
   EXE_FILES => [ qw() ],
   (eval { ExtUtils::MakeMaker->VERSION(6.31) } ? (LICENSE => 'perl') : ()),
   PREREQ_PM    => {
@@ -21,7 +21,7 @@ WriteMakefile(
     "Git::Wrapper" => '0',
     "Dist::Zilla::Role::AfterRelease" => '0',
     "File::Find" => '0',
-    "File::Path" => '0',
+    "File::Path" => '2.07',
     "File::Spec::Functions" => '0',
     "Moose" => '0',
     "English" => '0',
