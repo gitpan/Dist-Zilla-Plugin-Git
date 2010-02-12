@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::PluginBundle::Git;
-our $VERSION = '1.093410';
+our $VERSION = '1.100430';
 # ABSTRACT: all git plugins in one go
 
 use Moose;
@@ -49,7 +49,7 @@ Dist::Zilla::PluginBundle::Git - all git plugins in one go
 
 =head1 VERSION
 
-version 1.093410
+version 1.100430
 
 =head1 SYNOPSIS
 
@@ -86,3 +86,4 @@ the same terms as the Perl 5 programming language system itself.
 
 
 __END__
+

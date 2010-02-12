@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git;
-our $VERSION = '1.093410';
+our $VERSION = '1.100430';
 # ABSTRACT: update your git repository after release
 
 1;
@@ -25,7 +25,7 @@ Dist::Zilla::Plugin::Git - update your git repository after release
 
 =head1 VERSION
 
-version 1.093410
+version 1.100430
 
 =head1 DESCRIPTION
 
@@ -95,3 +95,5 @@ the same terms as the Perl 5 programming language system itself.
 
 
 __END__
+
+

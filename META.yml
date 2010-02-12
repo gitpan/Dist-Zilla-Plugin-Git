@@ -3,10 +3,10 @@ abstract: 'update your git repository after release'
 author:
   - 'Jerome Quelin'
 build_requires:
-  Module::Build: 0.35
+  Module::Build: 0.3601
 configure_requires:
-  Module::Build: 0.35
-generated_by: 'Dist::Zilla version 1.093371'
+  Module::Build: 0.3601
+generated_by: 'Dist::Zilla version 1.100160'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,22 +15,22 @@ name: Dist-Zilla-Plugin-Git
 provides:
   Dist::Zilla::Plugin::Git:
     file: lib/Dist/Zilla/Plugin/Git.pm
-    version: 1.093410
+    version: 1.100430
   Dist::Zilla::Plugin::Git::Check:
     file: lib/Dist/Zilla/Plugin/Git/Check.pm
-    version: 1.093410
+    version: 1.100430
   Dist::Zilla::Plugin::Git::Commit:
     file: lib/Dist/Zilla/Plugin/Git/Commit.pm
-    version: 1.093410
+    version: 1.100430
   Dist::Zilla::Plugin::Git::Push:
     file: lib/Dist/Zilla/Plugin/Git/Push.pm
-    version: 1.093410
+    version: 1.100430
   Dist::Zilla::Plugin::Git::Tag:
     file: lib/Dist/Zilla/Plugin/Git/Tag.pm
-    version: 1.093410
+    version: 1.100430
   Dist::Zilla::PluginBundle::Git:
     file: lib/Dist/Zilla/PluginBundle/Git.pm
-    version: 1.093410
+    version: 1.100430
 requires:
   Cwd: 0
   Dist::Zilla: 1.093250
@@ -38,17 +38,17 @@ requires:
   Dist::Zilla::Role::BeforeRelease: 0
   Dist::Zilla::Role::PluginBundle: 0
   English: 0
-  ExtUtils::MakeMaker: 0
   File::Find: 0
   File::Path: 2.07
   File::Spec::Functions: 0
   File::Temp: 0
   Git::Wrapper: 0
-  Module::Build: 0
+  Module::Build: 0.3601
   Moose: 0
   Moose::Autobox: 0
   MooseX::Has::Sugar: 0
   MooseX::Types::Moose: 0
+  Path::Class: 0
   String::Formatter: 0
   Test::Exception: 0
   Test::More: 0
@@ -57,4 +57,4 @@ resources:
   MailingList: http://www.listbox.com/subscribe/?list_id=139292
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-Git/
   repository: http://github.com/jquelin/dist-zilla-plugin-git
-version: 1.093410
+version: 1.100430
