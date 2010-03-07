@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Push;
-our $VERSION = '1.100430';
+our $VERSION = '1.100660';
 # ABSTRACT: push current branch
 
 use Git::Wrapper;
@@ -46,7 +46,7 @@ Dist::Zilla::Plugin::Git::Push - push current branch
 
 =head1 VERSION
 
-version 1.100430
+version 1.100660
 
 =head1 SYNOPSIS
 
