@@ -27,15 +27,15 @@ my %module_build_args = (
                                        'English' => '0',
                                        'perl' => '5.008',
                                        'Test::More' => '0',
+                                       'Dist::Zilla' => '1.100660',
                                        'File::Temp' => '0',
-                                       'Dist::Zilla' => '1.093250',
                                        'Dist::Zilla::Role::BeforeRelease' => '0',
                                        'Path::Class' => '0',
                                        'String::Formatter' => '0',
                                        'Cwd' => '0'
                                      },
                        'configure_requires' => {},
-                       'dist_version' => '1.100680'
+                       'dist_version' => '1.100681'
                      );
 
 

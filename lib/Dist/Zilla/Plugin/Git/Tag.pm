@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Tag;
-our $VERSION = '1.100680';
+our $VERSION = '1.100681';
 # ABSTRACT: tag the new version
 
 use Git::Wrapper;
@@ -55,7 +55,7 @@ Dist::Zilla::Plugin::Git::Tag - tag the new version
 
 =head1 VERSION
 
-version 1.100680
+version 1.100681
 
 =head1 SYNOPSIS
 
