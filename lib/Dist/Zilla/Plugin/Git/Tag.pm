@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Tag;
-our $VERSION = '1.100660';
+our $VERSION = '1.100680';
 # ABSTRACT: tag the new version
 
 use Git::Wrapper;
@@ -30,7 +30,6 @@ with 'Dist::Zilla::Role::AfterRelease';
 
 # -- attributes
 
-has filename   => ( ro, isa=>Str, default => 'Changes' );
 has tag_format => ( ro, isa=>Str, default => 'v%v' );
 
 
@@ -42,7 +41,7 @@ sub after_release {
 
     # create a tag with the new version
     my $tag = _format_tag($self->tag_format, $self->zilla);
-    $git->tag( $tag );
+    $git->tag( {m=>$tag}, $tag );
 }
 
 1;
@@ -56,25 +55,22 @@ Dist::Zilla::Plugin::Git::Tag - tag the new version
 
 =head1 VERSION
 
-version 1.100660
+version 1.100680
 
 =head1 SYNOPSIS
 
 In your F<dist.ini>:
 
     [Git::Tag]
-    filename = Changes      ; this is the default
 
 =head1 DESCRIPTION
 
 Once the release is done, this plugin will record this fact in git by
-creating a tag.
+creating a tag. The tag is of the annotated type.
 
 The plugin accepts the following options:
 
 =over 4
-
-=item * filename - the name of your changelog file. Defaults to F<Changes>.
 
 =item * tag_format - format of the tag to apply. C<%v> will be
 replaced by the dist version. Defaults to C<v%v>.

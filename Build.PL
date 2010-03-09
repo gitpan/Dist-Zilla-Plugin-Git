@@ -35,7 +35,7 @@ my %module_build_args = (
                                        'Cwd' => '0'
                                      },
                        'configure_requires' => {},
-                       'dist_version' => '1.100660'
+                       'dist_version' => '1.100680'
                      );
 
 
