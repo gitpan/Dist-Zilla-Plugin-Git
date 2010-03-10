@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
-our $VERSION = '1.100681';
+our $VERSION = '1.100690';
 # ABSTRACT: commit dist.ini and changelog
 
 use File::Temp           qw{ tempfile };
@@ -41,6 +41,20 @@ sub after_release {
         $git->ls_files( { modified=>1, deleted=>1 } );
     return unless @output;
 
+    # write commit message in a temp file
+    my ($fh, $filename) = tempfile( 'DZP-git.XXXX', UNLINK => 1 );
+    print $fh $self->get_commit_message;
+    close $fh;
+
+    # commit the files in git
+    $git->add( 'dist.ini', $self->filename );
+    $git->commit( { file=>$filename } );
+}
+
+
+sub get_commit_message {
+    my $self = shift;
+
     # parse changelog to find commit message
     my $changelog = Dist::Zilla::File::OnDisk->new( { name => $self->filename } );
     my $newver    = $self->zilla->version;
@@ -49,15 +63,9 @@ sub after_release {
         split /\n/, $changelog->content;
     shift @content; # drop the version line
 
-    # write commit message in a temp file
-    my ($fh, $filename) = tempfile( 'DZP-git.XXXX', UNLINK => 1 );
-    print $fh join("\n", "v$newver\n", @content, ''); # add a final \n
-    close $fh;
-
-    # commit the files in git
-    $git->add( 'dist.ini', $self->filename );
-    $git->commit( { file=>$filename } );
-}
+    # return commit message
+    return join("\n", "v$newver\n", @content, ''); # add a final \n
+} # end get_commit_message
 
 1;
 
@@ -70,7 +78,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dist.ini and changelog
 
 =head1 VERSION
 
-version 1.100681
+version 1.100690
 
 =head1 SYNOPSIS
 
@@ -92,6 +100,13 @@ The plugin accepts the following options:
 =item * filename - the name of your changelog file. defaults to F<Changes>.
 
 =back
+
+=head1 METHODS
+
+=head2 get_commit_message
+
+This method returns the commit message.  The default implementation
+reads the Changes file to get the list of changes in the just-released version.
 
 =for Pod::Coverage::TrustPod after_release
 

@@ -1,5 +1,9 @@
 Revision history for Dist::Zilla::Plugin::Git
 
+1.100690  2010-03-10 13:20:37 Europe/Paris
+ - fix tests to work even when no global git config exists
+ - refactored commit message generation (christopher madsen)
+
 1.100681  2010-03-09 17:26:14 Europe/Paris
  - bumping minimum dzil version requirement
 
@@ -8,6 +12,7 @@ Revision history for Dist::Zilla::Plugin::Git
  - minor pod update
 
 1.100660  2010-03-07 13:41:39 Europe/Paris
+ - fix tests to work with git 1.7.0
  - fix tests to work with current Dist::Zilla (Ricardo Signes)
  - provide shorter plugin names to bundle contents (Ricardo Signes)
 
