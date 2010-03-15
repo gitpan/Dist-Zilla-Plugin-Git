@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Push;
-our $VERSION = '1.100740';
+our $VERSION = '1.100741';
 # ABSTRACT: push current branch
 
 use Git::Wrapper;
@@ -55,7 +55,7 @@ Dist::Zilla::Plugin::Git::Push - push current branch
 
 =head1 VERSION
 
-version 1.100740
+version 1.100741
 
 =head1 SYNOPSIS
 
@@ -75,7 +75,7 @@ The plugin accepts the following options:
 
 =item * 
 
-push_to - the name of the a remote to push to. The default is F<Changes>.
+push_to - the name of the a remote to push to. The default is F<origin>.
 This may be specified multiple times to push to multiple repositories.
 
 =back
