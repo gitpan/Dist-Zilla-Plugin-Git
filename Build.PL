@@ -17,16 +17,19 @@ my %module_build_args = (
                        'requires' => {
                                        'MooseX::Types::Moose' => '0',
                                        'MooseX::Has::Sugar' => '0',
+                                       'DateTime' => '0',
                                        'Dist::Zilla::Role::PluginBundle' => '0',
                                        'Class::MOP' => '0',
                                        'Git::Wrapper' => '0',
                                        'Dist::Zilla::Role::AfterRelease' => '0',
                                        'File::Find' => '0',
                                        'Moose' => '0',
-                                       'Test::Exception' => '0',
+                                       'Moose::Role' => '0',
                                        'English' => '0',
-                                       'perl' => '5.008',
+                                       'Test::Exception' => '0',
+                                       'Moose::Autobox' => '0',
                                        'Test::More' => '0',
+                                       'perl' => '5.008',
                                        'Dist::Zilla' => '1.100660',
                                        'File::Temp' => '0',
                                        'Dist::Zilla::Role::BeforeRelease' => '0',
@@ -35,7 +38,7 @@ my %module_build_args = (
                                        'Cwd' => '0'
                                      },
                        'configure_requires' => {},
-                       'dist_version' => '1.100690'
+                       'dist_version' => '1.100740'
                      );
 
 

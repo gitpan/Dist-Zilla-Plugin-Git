@@ -11,8 +11,8 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
-our $VERSION = '1.100690';
-# ABSTRACT: commit dist.ini and changelog
+our $VERSION = '1.100740';
+# ABSTRACT: commit dirty files
 
 use File::Temp           qw{ tempfile };
 use Git::Wrapper;
@@ -20,25 +20,39 @@ use Moose;
 use MooseX::Has::Sugar;
 use MooseX::Types::Moose qw{ Str };
 
+use String::Formatter method_stringf => {
+  -as => '_format_string',
+  codes => {
+    c => sub { $_[0]->_get_changes },
+    d => sub { require DateTime;
+               DateTime->now->format_cldr($_[1] || 'dd-MMM-yyyy') },
+    n => sub { "\n" },
+    N => sub { $_[0]->zilla->name },
+    v => sub { $_[0]->zilla->version },
+  },
+};
+
 with 'Dist::Zilla::Role::AfterRelease';
+with 'Dist::Zilla::Role::Git::DirtyFiles';
 
 
 # -- attributes
 
-has filename => ( ro, isa=>Str, default => 'Changes' );
+has commit_msg => ( ro, isa=>Str, default => 'v%v%n%n%c' );
+
+
+# -- public methods
 
 sub after_release {
     my $self = shift;
     my $git  = Git::Wrapper->new('.');
     my @output;
 
-    # check if changelog and dist.ini need to be committed
+    # check if there are dirty files that need to be committed.
     # at this time, we know that only those 2 files may remain modified,
     # otherwise before_release would have failed, ending the release
     # process.
-    @output =
-        grep { $_ eq 'dist.ini' || $_ eq $self->filename }
-        $git->ls_files( { modified=>1, deleted=>1 } );
+    @output = sort { lc $a cmp lc $b } $self->list_dirty_files($git, 1);
     return unless @output;
 
     # write commit message in a temp file
@@ -47,16 +61,38 @@ sub after_release {
     close $fh;
 
     # commit the files in git
-    $git->add( 'dist.ini', $self->filename );
+    $git->add( @output );
     $git->commit( { file=>$filename } );
+    $self->log("Committed @output");
 }
+
 
 
 sub get_commit_message {
     my $self = shift;
 
     # parse changelog to find commit message
-    my $changelog = Dist::Zilla::File::OnDisk->new( { name => $self->filename } );
+    my $changelog = Dist::Zilla::File::OnDisk->new( { name => $self->changelog } );
+    my $newver    = $self->zilla->version;
+    my @content   =
+        grep { /^$newver\s+/ ... /^\S/ } # from newver to un-indented
+        split /\n/, $changelog->content;
+    shift @content; # drop the version line
+    # drop unindented last line and trailing blank lines
+    pop @content while ( @content && $content[-1] =~ /^(?:\S|\s*$)/ );
+
+    # return commit message
+    return join("\n", "v$newver\n", @content, ''); # add a final \n
+} # end get_commit_message
+
+
+# -- private methods
+
+sub _get_changes {
+    my $self = shift;
+
+    # parse changelog to find commit message
+    my $changelog = Dist::Zilla::File::OnDisk->new( { name => $self->changelog } );
     my $newver    = $self->zilla->version;
     my @content   =
         grep { /^$newver\s+/ ... /^(\S|\s*$)/ }
@@ -64,8 +100,9 @@ sub get_commit_message {
     shift @content; # drop the version line
 
     # return commit message
-    return join("\n", "v$newver\n", @content, ''); # add a final \n
-} # end get_commit_message
+    return join("\n", @content, ''); # add a final \n
+} # end _get_changes
+
 
 1;
 
@@ -74,30 +111,65 @@ sub get_commit_message {
 
 =head1 NAME
 
-Dist::Zilla::Plugin::Git::Commit - commit dist.ini and changelog
+Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 1.100690
+version 1.100740
 
 =head1 SYNOPSIS
 
 In your F<dist.ini>:
 
     [Git::Commit]
-    filename = Changes      ; this is the default
+    changelog = Changes      ; this is the default
 
 =head1 DESCRIPTION
 
 Once the release is done, this plugin will record this fact in git by
 committing changelog and F<dist.ini>. The commit message will be taken
-from the changelog for this release.
+from the changelog for this release.  It will include lines between
+the current version and timestamp and the next non-indented line.
 
 The plugin accepts the following options:
 
 =over 4
 
-=item * filename - the name of your changelog file. defaults to F<Changes>.
+=item * changelog - the name of your changelog file. defaults to F<Changes>.
+
+=item * allow_dirty - a file that will be checked in if it is locally
+modified.  This option may appear multiple times.  The default
+list is F<dist.ini> and the changelog file given by C<changelog>.
+
+=item * commit_msg - the commit message to use. defaults to
+C<v%v%n%n%c>, meaning the version number and the list of changes.
+
+=back
+
+You can use the following codes in commit_msg:
+
+=over 4
+
+=item C<%c>
+
+The list of changes in the just-released version (read from C<changelog>).
+
+=item C<%{dd-MMM-yyyy}d>
+
+The current date.  You can use any CLDR format supported by
+L<DateTime>.  A bare C<%d> means C<%{dd-MMM-yyyy}d>.
+
+=item C<%n>
+
+a newline
+
+=item C<%N>
+
+the distribution name
+
+=item C<%v>
+
+the distribution version
 
 =back
 

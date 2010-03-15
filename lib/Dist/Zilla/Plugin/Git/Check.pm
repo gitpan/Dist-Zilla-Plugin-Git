@@ -11,21 +11,17 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Check;
-our $VERSION = '1.100690';
+our $VERSION = '1.100740';
 # ABSTRACT: check your git repository before releasing
 
 use Git::Wrapper;
 use Moose;
-use MooseX::Has::Sugar;
-use MooseX::Types::Moose qw{ Str };
 
 with 'Dist::Zilla::Role::BeforeRelease';
+with 'Dist::Zilla::Role::Git::DirtyFiles';
 
 
-# -- attributes
-
-has filename => ( ro, isa=>Str, default => 'Changes' );
-
+# -- public methods
 
 sub before_release {
     my $self = shift;
@@ -46,11 +42,9 @@ sub before_release {
         $self->log_fatal($errmsg);
     }
 
-    # everything but changelog and dist.ini should be in a clean state
-    @output =
-        grep { $_ ne $self->filename }
-        grep { $_ ne 'dist.ini' }
-        $git->ls_files( { modified=>1, deleted=>1 } );
+    # everything but files listed in allow_dirty should be in a
+    # clean state
+    @output = $self->list_dirty_files($git);
     if ( @output ) {
         my $errmsg =
             "branch $branch has some uncommitted files:\n" .
@@ -82,14 +76,16 @@ Dist::Zilla::Plugin::Git::Check - check your git repository before releasing
 
 =head1 VERSION
 
-version 1.100690
+version 1.100740
 
 =head1 SYNOPSIS
 
 In your F<dist.ini>:
 
     [Git::Check]
-    filename = Changes      ; this is the default
+    allow_dirty = dist.ini
+    allow_dirty = README
+    changelog = Changes      ; this is the default
 
 =head1 DESCRIPTION
 
@@ -102,8 +98,8 @@ following checks are performed before releasing:
 
 =item * there should be no untracked files in the working copy
 
-=item * the working copy should be clean. The changelog and F<dist.ini>
-can be modified locally, though.
+=item * the working copy should be clean. The files listed in
+C<allow_dirty> can be modified locally, though.
 
 =back
 
@@ -114,7 +110,12 @@ The plugin accepts the following options:
 
 =over 4
 
-=item * filename - the name of your changelog file. defaults to F<Changes>.
+=item * changelog - the name of your changelog file. defaults to F<Changes>.
+
+=item * allow_dirty - a file that is allowed to have local
+modifications.  This option may appear multiple times.  The default
+list is F<dist.ini> and the changelog file given by C<changelog>.  You
+can use C<allow_dirty => to prohibit all local modifications.
 
 =back
 

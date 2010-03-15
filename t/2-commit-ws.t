@@ -12,15 +12,12 @@ use strict;
 use warnings;
 
 use Dist::Zilla  1.093250;
-use Cwd          qw{ getcwd  };
-use File::Temp   qw{ tempdir };
 use Git::Wrapper;
 use Path::Class;
-use Test::More   tests => 3;
+use Test::More   tests => 1;
 
 # build fake repository
-chdir( dir('t', 'push') );
-dir( '.git' )->rmtree if -d '.git'; # clean up from any prior run
+chdir( dir('t', 'commit-ws') );
 system "git init";
 my $git = Git::Wrapper->new('.');
 $git->config( 'user.name'  => 'dzp-git test' );
@@ -28,29 +25,25 @@ $git->config( 'user.email' => 'dzp-git@test' );
 $git->add( qw{ dist.ini Changes } );
 $git->commit( { message => 'initial commit' } );
 
-# create a clone, and use it to set up origin
-my $clone = tempdir( CLEANUP => 1 );
-my $curr  = getcwd;
-$git->clone( { quiet=>1, 'no-checkout'=>1, bare=>1 }, $curr, $clone );
-$git->remote('add', 'origin', $clone);
-$git->config('branch.master.remote', 'origin');
-$git->config('branch.master.merge', 'refs/heads/master');
-
-# do the release
+# do a release, with changes and dist.ini updated
 append_to_file('Changes',  "\n");
 append_to_file('dist.ini', "\n");
 my $zilla = Dist::Zilla->from_config;
 $zilla->release;
 
-# check if everything was pushed
-$git = Git::Wrapper->new( $clone );
+# check if dist.ini and changelog have been committed
 my ($log) = $git->log( 'HEAD' );
-is( $log->message, "v1.23\n\n- foo\n- bar\n- baz\n", 'commit pushed' );
+my $expected = << "HERE";
+v1.23
 
-# check if tag has been correctly created
-my @tags = $git->tag;
-is( scalar(@tags), 1, 'one tag pushed' );
-is( $tags[0], 'v1.23', 'new tag created after new version' );
+- foo
+
+- bar
+
+- baz
+HERE
+
+is( $log->message, $expected, 'commit message taken from changelog' );
 
 # clean & exit
 dir( '.git' )->rmtree;
