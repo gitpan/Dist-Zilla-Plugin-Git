@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
-our $VERSION = '1.100741';
+our $VERSION = '1.100750';
 # ABSTRACT: commit dirty files
 
 use File::Temp           qw{ tempfile };
@@ -71,20 +71,8 @@ sub after_release {
 sub get_commit_message {
     my $self = shift;
 
-    # parse changelog to find commit message
-    my $changelog = Dist::Zilla::File::OnDisk->new( { name => $self->changelog } );
-    my $newver    = $self->zilla->version;
-    my @content   =
-        grep { /^$newver\s+/ ... /^\S/ } # from newver to un-indented
-        split /\n/, $changelog->content;
-    shift @content; # drop the version line
-    # drop unindented last line and trailing blank lines
-    pop @content while ( @content && $content[-1] =~ /^(?:\S|\s*$)/ );
-
-    # return commit message
-    return join("\n", "v$newver\n", @content, ''); # add a final \n
+    return _format_string($self->commit_msg, $self);
 } # end get_commit_message
-
 
 # -- private methods
 
@@ -95,9 +83,11 @@ sub _get_changes {
     my $changelog = Dist::Zilla::File::OnDisk->new( { name => $self->changelog } );
     my $newver    = $self->zilla->version;
     my @content   =
-        grep { /^$newver\s+/ ... /^(\S|\s*$)/ }
+        grep { /^$newver\s+/ ... /^\S/ } # from newver to un-indented
         split /\n/, $changelog->content;
     shift @content; # drop the version line
+    # drop unindented last line and trailing blank lines
+    pop @content while ( @content && $content[-1] =~ /^(?:\S|\s*$)/ );
 
     # return commit message
     return join("\n", @content, ''); # add a final \n
@@ -115,7 +105,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 1.100741
+version 1.100750
 
 =head1 SYNOPSIS
 
