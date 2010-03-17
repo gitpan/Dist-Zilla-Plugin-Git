@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Push;
-our $VERSION = '1.100750';
+our $VERSION = '1.100760';
 # ABSTRACT: push current branch
 
 use Git::Wrapper;
@@ -40,8 +40,8 @@ sub after_release {
     # push everything on remote branch
     for my $remote ( @{ $self->push_to } ) { 
       $self->log("pushing to $remote");
-      $git->push( $remote );
-      $git->push( { tags=>1 },  $remote );
+      $self->log_debug($_) for $git->push( $remote );
+      $self->log_debug($_) for $git->push( { tags=>1 },  $remote );
     }
 }
 
@@ -56,7 +56,7 @@ Dist::Zilla::Plugin::Git::Push - push current branch
 
 =head1 VERSION
 
-version 1.100750
+version 1.100760
 
 =head1 SYNOPSIS
 

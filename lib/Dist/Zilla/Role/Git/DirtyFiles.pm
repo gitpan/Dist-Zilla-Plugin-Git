@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Role::Git::DirtyFiles;
-our $VERSION = '1.100750';
+our $VERSION = '1.100760';
 # ABSTRACT: provide the allow_dirty & changelog attributes
 
 use Moose::Role;
@@ -64,7 +64,7 @@ Dist::Zilla::Role::Git::DirtyFiles - provide the allow_dirty & changelog attribu
 
 =head1 VERSION
 
-version 1.100750
+version 1.100760
 
 =head1 DESCRIPTION
 

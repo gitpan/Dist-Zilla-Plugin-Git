@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Check;
-our $VERSION = '1.100750';
+our $VERSION = '1.100760';
 # ABSTRACT: check your git repository before releasing
 
 use Git::Wrapper;
@@ -76,7 +76,7 @@ Dist::Zilla::Plugin::Git::Check - check your git repository before releasing
 
 =head1 VERSION
 
-version 1.100750
+version 1.100760
 
 =head1 SYNOPSIS
 

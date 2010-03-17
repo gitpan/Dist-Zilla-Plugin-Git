@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Tag;
-our $VERSION = '1.100750';
+our $VERSION = '1.100760';
 # ABSTRACT: tag the new version
 
 use Git::Wrapper;
@@ -29,6 +29,7 @@ use String::Formatter method_stringf => {
   },
 };
 
+with 'Dist::Zilla::Role::BeforeRelease';
 with 'Dist::Zilla::Role::AfterRelease';
 
 
@@ -39,6 +40,16 @@ has tag_message => ( ro, isa=>Str, default => 'v%v' );
 
 
 # -- role implementation
+
+sub before_release {
+    my $self = shift;
+    my $git  = Git::Wrapper->new('.');
+
+    # Make sure a tag with the new version doesn't exist yet:
+    my $tag = _format_tag($self->tag_format, $self->zilla);
+    $self->log_fatal("tag $tag already exists")
+        if $git->tag('-l', $tag );
+}
 
 sub after_release {
     my $self = shift;
@@ -66,7 +77,7 @@ Dist::Zilla::Plugin::Git::Tag - tag the new version
 
 =head1 VERSION
 
-version 1.100750
+version 1.100760
 
 =head1 SYNOPSIS
 
@@ -79,8 +90,14 @@ In your F<dist.ini>:
 =head1 DESCRIPTION
 
 Once the release is done, this plugin will record this fact in git by
-creating a tag.  If you set the C<tag_message> attribute, it makes an
-annotated tag.  Otherwise, it makes a lightweight tag.
+creating a tag.  By default, it makes an annotated tag.  You can set
+the C<tag_message> attribute to change the message.  If you set
+C<tag_message> to the empty string, it makes a lightweight tag.
+
+It also checks before the release to ensure the tag to be created
+doesn't already exist.  (You would have to manually delete the
+existing tag before you could release the same version again, but that
+is almost never a good idea.)
 
 The plugin accepts the following options:
 
@@ -117,6 +134,7 @@ the distribution version
 =back
 
 =for Pod::Coverage::TrustPod after_release
+    before_release
 
 =head1 AUTHOR
 

@@ -1,5 +1,9 @@
 Revision history for Dist::Zilla::Plugin::Git
 
+1.100760  2010-03-17 10:16:56 Europe/Paris
+ - add a BeforeRelease check in Tag to prevent re-releases (christopher madsen)
+ - Commit and Push now pass Git's output to log_debug (christopher madsen)
+
 1.100750  2010-03-16 16:25:56 Europe/Paris
  - actually use commit_msg (christopher madsen)
  - Push now logs before pushing (christopher madsen)
