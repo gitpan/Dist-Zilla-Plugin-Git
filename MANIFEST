@@ -31,7 +31,7 @@ t/push-multi/Changes
 t/push-multi/dist.ini
 t/push/Changes
 t/push/dist.ini
-t/release-meta-yaml.t
+t/release-distmeta.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 t/tag/Changes

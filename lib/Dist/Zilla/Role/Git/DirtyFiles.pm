@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Role::Git::DirtyFiles;
-our $VERSION = '1.100760';
+$Dist::Zilla::Role::Git::DirtyFiles::VERSION = '1.100900';
 # ABSTRACT: provide the allow_dirty & changelog attributes
 
 use Moose::Role;
@@ -30,8 +30,12 @@ has allow_dirty => (
 );
 has changelog => ( ro, isa=>Str, default => 'Changes' );
 
-sub mvp_multivalue_args { qw(allow_dirty) }
+around mvp_multivalue_args => sub {
+  my ($orig, $self) = @_;
 
+  my @start = $self->$orig;
+  return (@start, 'allow_dirty');
+};
 
 # -- builders & initializers
 
@@ -64,7 +68,7 @@ Dist::Zilla::Role::Git::DirtyFiles - provide the allow_dirty & changelog attribu
 
 =head1 VERSION
 
-version 1.100760
+version 1.100900
 
 =head1 DESCRIPTION
 

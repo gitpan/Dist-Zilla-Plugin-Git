@@ -8,37 +8,41 @@ my %module_build_args = (
                        'dist_abstract' => 'update your git repository after release',
                        'script_files' => [],
                        'license' => 'perl',
-                       'build_requires' => {},
+                       'build_requires' => {
+                                             'Test::More' => '0',
+                                             'Test::Exception' => '0',
+                                             'English' => '0',
+                                             'File::Find' => '0',
+                                             'Path::Class' => '0',
+                                             'Module::Build' => '0.3601',
+                                             'Cwd' => '0'
+                                           },
                        'dist_name' => 'Dist-Zilla-Plugin-Git',
                        'dist_author' => [
                                           'Jerome Quelin'
                                         ],
                        'module_name' => 'Dist::Zilla::Plugin::Git',
                        'requires' => {
+                                       'Moose::Role' => '0',
+                                       'DateTime' => '0',
                                        'MooseX::Types::Moose' => '0',
                                        'MooseX::Has::Sugar' => '0',
-                                       'DateTime' => '0',
                                        'Dist::Zilla::Role::PluginBundle' => '0',
                                        'Class::MOP' => '0',
                                        'Git::Wrapper' => '0',
                                        'Dist::Zilla::Role::AfterRelease' => '0',
-                                       'File::Find' => '0',
-                                       'Moose' => '0',
-                                       'Moose::Role' => '0',
-                                       'English' => '0',
-                                       'Test::Exception' => '0',
                                        'Moose::Autobox' => '0',
-                                       'Test::More' => '0',
                                        'perl' => '5.008',
-                                       'Dist::Zilla' => '1.100660',
                                        'File::Temp' => '0',
+                                       'Dist::Zilla' => '1.100660',
                                        'Dist::Zilla::Role::BeforeRelease' => '0',
-                                       'Path::Class' => '0',
                                        'String::Formatter' => '0',
-                                       'Cwd' => '0'
+                                       'Moose' => '0'
                                      },
-                       'configure_requires' => {},
-                       'dist_version' => '1.100760'
+                       'configure_requires' => {
+                                                 'Module::Build' => '0.3601'
+                                               },
+                       'dist_version' => '1.100900'
                      );
 
 

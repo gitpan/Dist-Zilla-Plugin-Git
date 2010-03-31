@@ -2,9 +2,17 @@
 abstract: 'update your git repository after release'
 author:
   - 'Jerome Quelin'
-build_requires: {}
-configure_requires: {}
-generated_by: 'Dist::Zilla version 1.100711'
+build_requires:
+  Cwd: 0
+  English: 0
+  File::Find: 0
+  Module::Build: 0.3601
+  Path::Class: 0
+  Test::Exception: 0
+  Test::More: 0
+configure_requires:
+  Module::Build: 0.3601
+generated_by: 'Dist::Zilla version 2.100880'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -13,35 +21,32 @@ name: Dist-Zilla-Plugin-Git
 provides:
   Dist::Zilla::Plugin::Git:
     file: lib/Dist/Zilla/Plugin/Git.pm
-    version: 1.100760
+    version: 1.100900
   Dist::Zilla::Plugin::Git::Check:
     file: lib/Dist/Zilla/Plugin/Git/Check.pm
-    version: 1.100760
+    version: 1.100900
   Dist::Zilla::Plugin::Git::Commit:
     file: lib/Dist/Zilla/Plugin/Git/Commit.pm
-    version: 1.100760
+    version: 1.100900
   Dist::Zilla::Plugin::Git::Push:
     file: lib/Dist/Zilla/Plugin/Git/Push.pm
-    version: 1.100760
+    version: 1.100900
   Dist::Zilla::Plugin::Git::Tag:
     file: lib/Dist/Zilla/Plugin/Git/Tag.pm
-    version: 1.100760
+    version: 1.100900
   Dist::Zilla::PluginBundle::Git:
     file: lib/Dist/Zilla/PluginBundle/Git.pm
-    version: 1.100760
+    version: 1.100900
   Dist::Zilla::Role::Git::DirtyFiles:
     file: lib/Dist/Zilla/Role/Git/DirtyFiles.pm
-    version: 1.100760
+    version: 1.100900
 requires:
   Class::MOP: 0
-  Cwd: 0
   DateTime: 0
   Dist::Zilla: 1.100660
   Dist::Zilla::Role::AfterRelease: 0
   Dist::Zilla::Role::BeforeRelease: 0
   Dist::Zilla::Role::PluginBundle: 0
-  English: 0
-  File::Find: 0
   File::Temp: 0
   Git::Wrapper: 0
   Moose: 0
@@ -49,13 +54,10 @@ requires:
   Moose::Role: 0
   MooseX::Has::Sugar: 0
   MooseX::Types::Moose: 0
-  Path::Class: 0
   String::Formatter: 0
-  Test::Exception: 0
-  Test::More: 0
   perl: 5.008
 resources:
   MailingList: http://www.listbox.com/subscribe/?list_id=139292
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-Git/
   repository: http://github.com/jquelin/dist-zilla-plugin-git
-version: 1.100760
+version: 1.100900
