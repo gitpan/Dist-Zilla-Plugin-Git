@@ -12,6 +12,7 @@ use strict;
 use warnings;
 
 use Dist::Zilla  1.093250;
+use Dist::Zilla::Tester;
 use Cwd          qw{ getcwd  };
 use File::Temp   qw{ tempdir };
 use Git::Wrapper;
@@ -19,10 +20,14 @@ use Path::Class;
 use Test::More   tests => 3;
 
 # build fake repository
-chdir( dir('t', 'push') );
-dir( '.git' )->rmtree if -d '.git'; # clean up from any prior run
+my $zilla = Dist::Zilla::Tester->from_config({
+  dist_root => dir(qw(t push)),
+});
+
+chdir $zilla->tempdir->subdir('source');
 system "git init";
-my $git = Git::Wrapper->new('.');
+my $git   = Git::Wrapper->new('.');
+
 $git->config( 'user.name'  => 'dzp-git test' );
 $git->config( 'user.email' => 'dzp-git@test' );
 $git->add( qw{ dist.ini Changes } );
@@ -39,7 +44,6 @@ $git->config('branch.master.merge', 'refs/heads/master');
 # do the release
 append_to_file('Changes',  "\n");
 append_to_file('dist.ini', "\n");
-my $zilla = Dist::Zilla->from_config;
 $zilla->release;
 
 # check if everything was pushed
@@ -51,11 +55,6 @@ is( $log->message, "v1.23\n\n- foo\n- bar\n- baz\n", 'commit pushed' );
 my @tags = $git->tag;
 is( scalar(@tags), 1, 'one tag pushed' );
 is( $tags[0], 'v1.23', 'new tag created after new version' );
-
-# clean & exit
-dir( '.git' )->rmtree;
-unlink 'Foo-1.23.tar.gz';
-exit;
 
 sub append_to_file {
     my ($file, @lines) = @_;

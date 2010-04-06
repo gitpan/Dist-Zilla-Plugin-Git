@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Push;
-$Dist::Zilla::Plugin::Git::Push::VERSION = '1.100900';
+$Dist::Zilla::Plugin::Git::Push::VERSION = '1.100960';
 # ABSTRACT: push current branch
 
 use Git::Wrapper;
@@ -40,8 +40,9 @@ sub after_release {
     # push everything on remote branch
     for my $remote ( @{ $self->push_to } ) { 
       $self->log("pushing to $remote");
-      $self->log_debug($_) for $git->push( $remote );
-      $self->log_debug($_) for $git->push( { tags=>1 },  $remote );
+      my @remote = split(/\s+/,$remote);
+      $self->log_debug($_) for $git->push( @remote );
+      $self->log_debug($_) for $git->push( { tags=>1 },  $remote[0] );
     }
 }
 
@@ -56,7 +57,7 @@ Dist::Zilla::Plugin::Git::Push - push current branch
 
 =head1 VERSION
 
-version 1.100900
+version 1.100960
 
 =head1 SYNOPSIS
 
@@ -64,6 +65,7 @@ In your F<dist.ini>:
 
     [Git::Push]
     push_to = origin      ; this is the default
+    push_to = origin HEAD:refs/heads/released ; also push to released branch
 
 =head1 DESCRIPTION
 

@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
-$Dist::Zilla::Plugin::Git::Commit::VERSION = '1.100900';
+$Dist::Zilla::Plugin::Git::Commit::VERSION = '1.100960';
 # ABSTRACT: commit dirty files
 
 use File::Temp           qw{ tempfile };
@@ -105,7 +105,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 1.100900
+version 1.100960
 
 =head1 SYNOPSIS
 

@@ -4,6 +4,7 @@ author:
   - 'Jerome Quelin'
 build_requires:
   Cwd: 0
+  Dist::Zilla::Tester: 0
   English: 0
   File::Find: 0
   Module::Build: 0.3601
@@ -21,25 +22,25 @@ name: Dist-Zilla-Plugin-Git
 provides:
   Dist::Zilla::Plugin::Git:
     file: lib/Dist/Zilla/Plugin/Git.pm
-    version: 1.100900
+    version: 1.100960
   Dist::Zilla::Plugin::Git::Check:
     file: lib/Dist/Zilla/Plugin/Git/Check.pm
-    version: 1.100900
+    version: 1.100960
   Dist::Zilla::Plugin::Git::Commit:
     file: lib/Dist/Zilla/Plugin/Git/Commit.pm
-    version: 1.100900
+    version: 1.100960
   Dist::Zilla::Plugin::Git::Push:
     file: lib/Dist/Zilla/Plugin/Git/Push.pm
-    version: 1.100900
+    version: 1.100960
   Dist::Zilla::Plugin::Git::Tag:
     file: lib/Dist/Zilla/Plugin/Git/Tag.pm
-    version: 1.100900
+    version: 1.100960
   Dist::Zilla::PluginBundle::Git:
     file: lib/Dist/Zilla/PluginBundle/Git.pm
-    version: 1.100900
+    version: 1.100960
   Dist::Zilla::Role::Git::DirtyFiles:
     file: lib/Dist/Zilla/Role/Git/DirtyFiles.pm
-    version: 1.100900
+    version: 1.100960
 requires:
   Class::MOP: 0
   DateTime: 0
@@ -60,4 +61,4 @@ resources:
   MailingList: http://www.listbox.com/subscribe/?list_id=139292
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-Git/
   repository: http://github.com/jquelin/dist-zilla-plugin-git
-version: 1.100900
+version: 1.100960

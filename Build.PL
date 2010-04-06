@@ -15,6 +15,7 @@ my %module_build_args = (
                                              'File::Find' => '0',
                                              'Path::Class' => '0',
                                              'Module::Build' => '0.3601',
+                                             'Dist::Zilla::Tester' => '0',
                                              'Cwd' => '0'
                                            },
                        'dist_name' => 'Dist-Zilla-Plugin-Git',
@@ -42,7 +43,7 @@ my %module_build_args = (
                        'configure_requires' => {
                                                  'Module::Build' => '0.3601'
                                                },
-                       'dist_version' => '1.100900'
+                       'dist_version' => '1.100960'
                      );
 
 
