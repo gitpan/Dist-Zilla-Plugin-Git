@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Role::Git::DirtyFiles;
-$Dist::Zilla::Role::Git::DirtyFiles::VERSION = '1.100960';
+$Dist::Zilla::Role::Git::DirtyFiles::VERSION = '1.100970';
 # ABSTRACT: provide the allow_dirty & changelog attributes
 
 use Moose::Role;
@@ -68,7 +68,7 @@ Dist::Zilla::Role::Git::DirtyFiles - provide the allow_dirty & changelog attribu
 
 =head1 VERSION
 
-version 1.100960
+version 1.100970
 
 =head1 DESCRIPTION
 
@@ -100,7 +100,7 @@ are not allowed to be dirty are listed.
 
 In scalar context, returns the number of dirty files.
 
-=for Pod::Coverage::TrustPod mvp_multivalue_args
+=for Pod::Coverage mvp_multivalue_args
 
 =head1 AUTHOR
 

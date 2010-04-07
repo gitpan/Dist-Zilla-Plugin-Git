@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Check;
-$Dist::Zilla::Plugin::Git::Check::VERSION = '1.100960';
+$Dist::Zilla::Plugin::Git::Check::VERSION = '1.100970';
 # ABSTRACT: check your git repository before releasing
 
 use Git::Wrapper;
@@ -76,7 +76,7 @@ Dist::Zilla::Plugin::Git::Check - check your git repository before releasing
 
 =head1 VERSION
 
-version 1.100960
+version 1.100970
 
 =head1 SYNOPSIS
 
@@ -119,7 +119,7 @@ can use C<allow_dirty => to prohibit all local modifications.
 
 =back
 
-=for Pod::Coverage::TrustPod before_release
+=for Pod::Coverage before_release
 
 =head1 AUTHOR
 

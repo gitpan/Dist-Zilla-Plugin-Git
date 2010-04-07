@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Tag;
-$Dist::Zilla::Plugin::Git::Tag::VERSION = '1.100960';
+$Dist::Zilla::Plugin::Git::Tag::VERSION = '1.100970';
 # ABSTRACT: tag the new version
 
 use Git::Wrapper;
@@ -77,7 +77,7 @@ Dist::Zilla::Plugin::Git::Tag - tag the new version
 
 =head1 VERSION
 
-version 1.100960
+version 1.100970
 
 =head1 SYNOPSIS
 
@@ -133,7 +133,7 @@ the distribution version
 
 =back
 
-=for Pod::Coverage::TrustPod after_release
+=for Pod::Coverage after_release
     before_release
 
 =head1 AUTHOR

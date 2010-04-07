@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::PluginBundle::Git;
-$Dist::Zilla::PluginBundle::Git::VERSION = '1.100960';
+$Dist::Zilla::PluginBundle::Git::VERSION = '1.100970';
 # ABSTRACT: all git plugins in one go
 
 use Moose;
@@ -22,15 +22,11 @@ with 'Dist::Zilla::Role::PluginBundle';
 # bundle all git plugins
 my @names   = qw{ Check Commit Tag Push };
 
-# bundle all git plugins
-my @names   = qw{ Check Commit Tag Push };
-
 my %multi;
 for my $name (@names) {
     my $class = "Dist::Zilla::Plugin::Git::$name";
     Class::MOP::load_class($class);
-    @multi{$class->mvp_multivalue_args} = ()
-        if $class->can('mvp_multivalue_args');
+    @multi{$class->mvp_multivalue_args} = ();
 }
 
 sub mvp_multivalue_args { keys %multi; }
@@ -68,7 +64,7 @@ Dist::Zilla::PluginBundle::Git - all git plugins in one go
 
 =head1 VERSION
 
-version 1.100960
+version 1.100970
 
 =head1 SYNOPSIS
 
@@ -94,7 +90,8 @@ This is a plugin bundle to load all git plugins. It is equivalent to:
 
 The options are passed through to the plugins.
 
-=for Pod::Coverage::TrustPod bundle_config
+=for Pod::Coverage bundle_config
+    mvp_multivalue_args
 
 =head1 AUTHOR
 

@@ -35,7 +35,7 @@ my %module_build_args = (
                                        'Moose::Autobox' => '0',
                                        'perl' => '5.008',
                                        'File::Temp' => '0',
-                                       'Dist::Zilla' => '1.100660',
+                                       'Dist::Zilla' => '2.100880',
                                        'Dist::Zilla::Role::BeforeRelease' => '0',
                                        'String::Formatter' => '0',
                                        'Moose' => '0'
@@ -43,7 +43,7 @@ my %module_build_args = (
                        'configure_requires' => {
                                                  'Module::Build' => '0.3601'
                                                },
-                       'dist_version' => '1.100960'
+                       'dist_version' => '1.100970'
                      );
 
 

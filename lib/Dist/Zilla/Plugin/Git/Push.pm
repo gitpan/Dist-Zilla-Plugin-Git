@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Push;
-$Dist::Zilla::Plugin::Git::Push::VERSION = '1.100960';
+$Dist::Zilla::Plugin::Git::Push::VERSION = '1.100970';
 # ABSTRACT: push current branch
 
 use Git::Wrapper;
@@ -57,7 +57,7 @@ Dist::Zilla::Plugin::Git::Push - push current branch
 
 =head1 VERSION
 
-version 1.100960
+version 1.100970
 
 =head1 SYNOPSIS
 
@@ -83,7 +83,7 @@ This may be specified multiple times to push to multiple repositories.
 
 =back
 
-=for Pod::Coverage::TrustPod after_release
+=for Pod::Coverage after_release
     mvp_multivalue_args
 
 =head1 AUTHOR

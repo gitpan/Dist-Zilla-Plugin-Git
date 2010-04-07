@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
-$Dist::Zilla::Plugin::Git::Commit::VERSION = '1.100960';
+$Dist::Zilla::Plugin::Git::Commit::VERSION = '1.100970';
 # ABSTRACT: commit dirty files
 
 use File::Temp           qw{ tempfile };
@@ -105,7 +105,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 1.100960
+version 1.100970
 
 =head1 SYNOPSIS
 
@@ -170,7 +170,7 @@ the distribution version
 This method returns the commit message.  The default implementation
 reads the Changes file to get the list of changes in the just-released version.
 
-=for Pod::Coverage::TrustPod after_release
+=for Pod::Coverage after_release
 
 =head1 AUTHOR
 
