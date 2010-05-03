@@ -11,7 +11,9 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git;
-$Dist::Zilla::Plugin::Git::VERSION = '1.100970';
+BEGIN {
+  $Dist::Zilla::Plugin::Git::VERSION = '1.101230';
+}
 # ABSTRACT: update your git repository after release
 
 use Dist::Zilla 2.100880;    # Need mvp_multivalue_args in Plugin role
@@ -26,7 +28,7 @@ Dist::Zilla::Plugin::Git - update your git repository after release
 
 =head1 VERSION
 
-version 1.100970
+version 1.101230
 
 =head1 DESCRIPTION
 

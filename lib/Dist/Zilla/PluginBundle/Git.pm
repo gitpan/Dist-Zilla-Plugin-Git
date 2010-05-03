@@ -11,7 +11,9 @@ use strict;
 use warnings;
 
 package Dist::Zilla::PluginBundle::Git;
-$Dist::Zilla::PluginBundle::Git::VERSION = '1.100970';
+BEGIN {
+  $Dist::Zilla::PluginBundle::Git::VERSION = '1.101230';
+}
 # ABSTRACT: all git plugins in one go
 
 use Moose;
@@ -33,7 +35,7 @@ sub mvp_multivalue_args { keys %multi; }
 
 sub bundle_config {
     my ($self, $section) = @_;
-    my $class = ( ref $self ) || $self;
+    #my $class = ( ref $self ) || $self;
     my $arg   = $section->{payload};
 
     my @config;
@@ -64,7 +66,7 @@ Dist::Zilla::PluginBundle::Git - all git plugins in one go
 
 =head1 VERSION
 
-version 1.100970
+version 1.101230
 
 =head1 SYNOPSIS
 

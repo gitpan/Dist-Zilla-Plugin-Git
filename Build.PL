@@ -9,14 +9,15 @@ my %module_build_args = (
                        'script_files' => [],
                        'license' => 'perl',
                        'build_requires' => {
-                                             'Test::More' => '0',
+                                             'Scalar::Util' => '0',
                                              'Test::Exception' => '0',
                                              'English' => '0',
+                                             'Dist::Zilla::Tester' => '0',
+                                             'Carp' => '0',
+                                             'Test::More' => '0.88',
                                              'File::Find' => '0',
                                              'Path::Class' => '0',
-                                             'Module::Build' => '0.3601',
-                                             'Dist::Zilla::Tester' => '0',
-                                             'Cwd' => '0'
+                                             'Module::Build' => '0.3601'
                                            },
                        'dist_name' => 'Dist-Zilla-Plugin-Git',
                        'dist_author' => [
@@ -24,7 +25,6 @@ my %module_build_args = (
                                         ],
                        'module_name' => 'Dist::Zilla::Plugin::Git',
                        'requires' => {
-                                       'Moose::Role' => '0',
                                        'DateTime' => '0',
                                        'MooseX::Types::Moose' => '0',
                                        'MooseX::Has::Sugar' => '0',
@@ -32,18 +32,22 @@ my %module_build_args = (
                                        'Class::MOP' => '0',
                                        'Git::Wrapper' => '0',
                                        'Dist::Zilla::Role::AfterRelease' => '0',
+                                       'Dist::Zilla::Role::AfterBuild' => '0',
+                                       'Moose' => '0',
+                                       'Moose::Role' => '0',
                                        'Moose::Autobox' => '0',
                                        'perl' => '5.008',
                                        'File::Temp' => '0',
                                        'Dist::Zilla' => '2.100880',
                                        'Dist::Zilla::Role::BeforeRelease' => '0',
                                        'String::Formatter' => '0',
-                                       'Moose' => '0'
+                                       'Cwd' => '0'
                                      },
+                       'recommends' => {},
                        'configure_requires' => {
                                                  'Module::Build' => '0.3601'
                                                },
-                       'dist_version' => '1.100970'
+                       'dist_version' => '1.101230'
                      );
 
 
