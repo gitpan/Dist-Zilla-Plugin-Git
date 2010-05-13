@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::Commit::VERSION = '1.101270';
+  $Dist::Zilla::Plugin::Git::Commit::VERSION = '1.101330';
 }
 # ABSTRACT: commit dirty files
 
@@ -85,7 +85,7 @@ sub _get_changes {
     my $changelog = Dist::Zilla::File::OnDisk->new( { name => $self->changelog } );
     my $newver    = $self->zilla->version;
     my @content   =
-        grep { /^$newver\s+/ ... /^\S/ } # from newver to un-indented
+        grep { /^$newver(?:\s+|$)/ ... /^\S/ } # from newver to un-indented
         split /\n/, $changelog->content;
     shift @content; # drop the version line
     # drop unindented last line and trailing blank lines
@@ -107,7 +107,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 1.101270
+version 1.101330
 
 =head1 SYNOPSIS
 
