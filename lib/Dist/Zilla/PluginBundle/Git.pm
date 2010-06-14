@@ -1,18 +1,18 @@
-# 
+#
 # This file is part of Dist-Zilla-Plugin-Git
-# 
+#
 # This software is copyright (c) 2009 by Jerome Quelin.
-# 
+#
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
-# 
+#
 use 5.008;
 use strict;
 use warnings;
 
 package Dist::Zilla::PluginBundle::Git;
 BEGIN {
-  $Dist::Zilla::PluginBundle::Git::VERSION = '1.101330';
+  $Dist::Zilla::PluginBundle::Git::VERSION = '1.101650';
 }
 # ABSTRACT: all git plugins in one go
 
@@ -66,7 +66,7 @@ Dist::Zilla::PluginBundle::Git - all git plugins in one go
 
 =head1 VERSION
 
-version 1.101330
+version 1.101650
 
 =head1 SYNOPSIS
 

@@ -1,12 +1,12 @@
 #!perl
-# 
+#
 # This file is part of Dist-Zilla-Plugin-Git
-# 
+#
 # This software is copyright (c) 2009 by Jerome Quelin.
-# 
+#
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
-# 
+#
 
 use strict;
 use warnings;
@@ -35,7 +35,7 @@ $git->commit( { message => 'initial commit' } );
 
 $zilla->build;
 ok( $git->rev_parse('-q', '--verify', 'refs/heads/build/master'), 'source repo has the "build/master" branch') or diag $git->branch;
-is( $git->log('build/master'), 1, 'one commit on the build/master branch') or diag $git->branch;
+is( $git->log('build/master'), 2, 'one commit on the build/master branch') or diag $git->branch;
 
 chdir $cwd;
 
@@ -73,7 +73,7 @@ $git3->reset('--hard','origin/master');
 append_to_file('dist.ini', "\n\n");
 $git3->commit('-a', '-m', 'commit on master');
 $zilla3->build;
-is( $git3->log('build/master'), 2, 'two commits on the build/master branch') or diag $git3->branch;
+is( $git3->log('build/master'), 4, 'two commits on the build/master branch') or diag $git3->branch;
 
 sub append_to_file {
     my ($file, @lines) = @_;
