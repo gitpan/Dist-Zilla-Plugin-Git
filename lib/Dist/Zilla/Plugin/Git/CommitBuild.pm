@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::CommitBuild;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '1.101680';
+  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '1.101800';
 }
 # ABSTRACT: checkin build results on separate branch
 
@@ -42,17 +42,32 @@ use String::Formatter (
 	}
 );
 
-with 'Dist::Zilla::Role::AfterBuild';
+with 'Dist::Zilla::Role::AfterBuild', 'Dist::Zilla::Role::AfterRelease';
 
 # -- attributes
 
 has branch  => ( ro, isa => Str, default => 'build/%b', required => 1 );
+has release_branch  => ( ro, isa => Str, default => 'releases', required => 0 );
 has message => ( ro, isa => Str, default => 'Build results of %h (on %b)', required => 1 );
 
 # -- role implementation
 
 sub after_build {
     my ( $self, $args) = @_;
+
+    $self->_commit_build( $args, $self->branch );
+}
+
+sub after_release {
+    my ( $self, $args) = @_;
+
+    $self->_commit_build( $args, $self->release_branch );
+}
+
+sub _commit_build {
+    my ( $self, $args, $branch ) = @_;
+
+    return unless $branch;
 
     my $tmp_dir = File::Temp->newdir( CLEANUP => 1) ;
     my $src     = Git::Wrapper->new('.');
@@ -73,7 +88,7 @@ sub after_build {
         ($write_tree_repo->write_tree)[0];
     };
 
-    my $target_branch = _format_branch( $self->branch, $src );
+    my $target_branch = _format_branch( $branch, $src );
 
     # no change, abort
     return
@@ -116,7 +131,7 @@ Dist::Zilla::Plugin::Git::CommitBuild - checkin build results on separate branch
 
 =head1 VERSION
 
-version 1.101680
+version 1.101800
 
 =head1 SYNOPSIS
 
@@ -145,6 +160,11 @@ build contents
 A single formatting code (C<%b>) is defined for this attribute and will be
 substituted with the name of the current branch in your git repository.
 
+=item * release_branch - L<String::Formatter> string for where to commit the
+build contents
+
+Same as C<branch>, but commit the build content only after a release.
+
 =item * message - L<String::Formatter> string for what commit message
 to use when committing the results of the build.
 
@@ -163,6 +183,7 @@ This option supports three formatting codes:
 =back
 
 =for Pod::Coverage after_build
+    after_release
 
 =head1 AUTHOR
 

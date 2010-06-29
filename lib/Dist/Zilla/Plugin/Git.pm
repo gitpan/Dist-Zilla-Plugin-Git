@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::VERSION = '1.101680';
+  $Dist::Zilla::Plugin::Git::VERSION = '1.101800';
 }
 # ABSTRACT: update your git repository after release
 
@@ -28,7 +28,7 @@ Dist::Zilla::Plugin::Git - update your git repository after release
 
 =head1 VERSION
 
-version 1.101680
+version 1.101800
 
 =head1 DESCRIPTION
 
@@ -42,14 +42,18 @@ following plugins are provided in this distribution:
 
 =item * L<Dist::Zilla::Plugin::Git::Commit>
 
-=item * L<Dist::Zilla::Plugin::Git::Tag>
+=item * L<Dist::Zilla::Plugin::Git::CommitBuild>
+
+=item * L<Dist::Zilla::Plugin::Git::Init>
 
 =item * L<Dist::Zilla::Plugin::Git::Push>
 
+=item * L<Dist::Zilla::Plugin::Git::Tag>
+
 =back
 
-If you want to use all of them at once, you will be interested by
-L<Dist::Zilla::PluginBundle::Git>.
+A L<Dist::Zilla::PluginBundle::Git> bundle is also provided for your
+convenience, check its documentation to see which plugins it will load.
 
 =head1 SEE ALSO
 
