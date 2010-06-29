@@ -15,7 +15,8 @@ my %module_build_args = (
     'Path::Class' => '0',
     'Scalar::Util' => '0',
     'Test::Exception' => '0',
-    'Test::More' => '0.94'
+    'Test::More' => '0.94',
+    'version' => '0'
   },
   'configure_requires' => {
     'Module::Build' => '0.3601'
@@ -25,7 +26,7 @@ my %module_build_args = (
     'Jerome Quelin'
   ],
   'dist_name' => 'Dist-Zilla-Plugin-Git',
-  'dist_version' => '1.101800',
+  'dist_version' => '1.101801',
   'license' => 'perl',
   'module_name' => 'Dist::Zilla::Plugin::Git',
   'recommends' => {},

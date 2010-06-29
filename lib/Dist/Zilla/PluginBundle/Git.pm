@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::PluginBundle::Git;
 BEGIN {
-  $Dist::Zilla::PluginBundle::Git::VERSION = '1.101800';
+  $Dist::Zilla::PluginBundle::Git::VERSION = '1.101801';
 }
 # ABSTRACT: all git plugins in one go
 
@@ -66,7 +66,7 @@ Dist::Zilla::PluginBundle::Git - all git plugins in one go
 
 =head1 VERSION
 
-version 1.101800
+version 1.101801
 
 =head1 SYNOPSIS
 
