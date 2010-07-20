@@ -2,7 +2,6 @@ Build.PL
 Changes
 LICENSE
 MANIFEST
-META.json
 META.yml
 README
 dist.ini
@@ -51,8 +50,3 @@ t/release-portability.t
 t/release-unused-vars.t
 t/tag/Changes
 t/tag/dist.ini
-tmp/3oQGlpidkm/source/Changes
-tmp/3oQGlpidkm/source/dist.ini
-tmp/EKm320veKo/source/Changes
-tmp/EKm320veKo/source/Foo-1.23.tar.gz
-tmp/EKm320veKo/source/dist.ini

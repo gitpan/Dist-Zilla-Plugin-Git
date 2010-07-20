@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::VERSION = '1.101801';
+  $Dist::Zilla::Plugin::Git::VERSION = '1.102010';
 }
 # ABSTRACT: update your git repository after release
 
@@ -28,7 +28,7 @@ Dist::Zilla::Plugin::Git - update your git repository after release
 
 =head1 VERSION
 
-version 1.101801
+version 1.102010
 
 =head1 DESCRIPTION
 
@@ -89,7 +89,7 @@ L<http://cpanratings.perl.org/d/Dist-Zilla-Plugin-Git>
 
 =head1 AUTHOR
 
-  Jerome Quelin
+Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 
