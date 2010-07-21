@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::CommitBuild;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '1.102010';
+  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '1.102020';
 }
 # ABSTRACT: checkin build results on separate branch
 
@@ -47,7 +47,7 @@ with 'Dist::Zilla::Role::AfterBuild', 'Dist::Zilla::Role::AfterRelease';
 # -- attributes
 
 has branch  => ( ro, isa => Str, default => 'build/%b', required => 1 );
-has release_branch  => ( ro, isa => Str, default => 'releases', required => 0 );
+has release_branch  => ( ro, isa => Str, required => 0 );
 has message => ( ro, isa => Str, default => 'Build results of %h (on %b)', required => 1 );
 
 # -- role implementation
@@ -131,7 +131,7 @@ Dist::Zilla::Plugin::Git::CommitBuild - checkin build results on separate branch
 
 =head1 VERSION
 
-version 1.102010
+version 1.102020
 
 =head1 SYNOPSIS
 
@@ -163,7 +163,8 @@ substituted with the name of the current branch in your git repository.
 =item * release_branch - L<String::Formatter> string for where to commit the
 build contents
 
-Same as C<branch>, but commit the build content only after a release.
+Same as C<branch>, but commit the build content only after a release. No
+default, meaning no release branch.
 
 =item * message - L<String::Formatter> string for what commit message
 to use when committing the results of the build.
