@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::CommitBuild;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '1.102020';
+  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '1.102040';
 }
 # ABSTRACT: checkin build results on separate branch
 
@@ -49,11 +49,16 @@ with 'Dist::Zilla::Role::AfterBuild', 'Dist::Zilla::Role::AfterRelease';
 has branch  => ( ro, isa => Str, default => 'build/%b', required => 1 );
 has release_branch  => ( ro, isa => Str, required => 0 );
 has message => ( ro, isa => Str, default => 'Build results of %h (on %b)', required => 1 );
+has build_root => ( rw );
 
 # -- role implementation
 
 sub after_build {
     my ( $self, $args) = @_;
+
+    # because the build_root mysteriously change at
+    # the 'after_release' stage
+    $self->build_root( $args->{build_root} );
 
     $self->_commit_build( $args, $self->branch );
 }
@@ -65,14 +70,14 @@ sub after_release {
 }
 
 sub _commit_build {
-    my ( $self, $args, $branch ) = @_;
+    my ( $self, undef, $branch ) = @_;
 
     return unless $branch;
 
     my $tmp_dir = File::Temp->newdir( CLEANUP => 1) ;
     my $src     = Git::Wrapper->new('.');
 
-    my $dir = rel2abs( $args->{build_root} );
+    my $dir = rel2abs( $self->build_root );
 
     my $tree = do {
         # don't overwrite the user's index
@@ -131,7 +136,7 @@ Dist::Zilla::Plugin::Git::CommitBuild - checkin build results on separate branch
 
 =head1 VERSION
 
-version 1.102020
+version 1.102040
 
 =head1 SYNOPSIS
 
