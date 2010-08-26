@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::Commit::VERSION = '1.102090';
+  $Dist::Zilla::Plugin::Git::Commit::VERSION = '1.102380';
 }
 # ABSTRACT: commit dirty files
 
@@ -107,7 +107,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 1.102090
+version 1.102380
 
 =head1 SYNOPSIS
 
