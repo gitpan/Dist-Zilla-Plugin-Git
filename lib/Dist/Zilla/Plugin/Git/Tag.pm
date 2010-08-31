@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Tag;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::Tag::VERSION = '1.102380';
+  $Dist::Zilla::Plugin::Git::Tag::VERSION = '1.102430';
 }
 # ABSTRACT: tag the new version
 
@@ -41,6 +41,16 @@ has tag_format  => ( ro, isa=>Str, default => 'v%v' );
 has tag_message => ( ro, isa=>Str, default => 'v%v' );
 has branch => ( ro, isa=>Str, predicate=>'has_branch' );
 
+
+has tag => ( ro, isa => Str, lazy_build => 1, );
+
+sub _build_tag
+{
+    my $self = shift;
+    return _format_tag($self->tag_format, $self->zilla);
+}
+
+
 # -- role implementation
 
 sub before_release {
@@ -48,7 +58,7 @@ sub before_release {
     my $git  = Git::Wrapper->new('.');
 
     # Make sure a tag with the new version doesn't exist yet:
-    my $tag = _format_tag($self->tag_format, $self->zilla);
+    my $tag = $self->tag;
     $self->log_fatal("tag $tag already exists")
         if $git->tag('-l', $tag );
 }
@@ -64,7 +74,7 @@ sub after_release {
     my @branch = $self->has_branch ? ( $self->branch ) : ();
 
     # create a tag with the new version
-    my $tag = _format_tag($self->tag_format, $self->zilla);
+    my $tag = $self->tag;
     $git->tag( @opts, $tag, @branch );
     $self->log("Tagged $tag");
 }
@@ -80,7 +90,7 @@ Dist::Zilla::Plugin::Git::Tag - tag the new version
 
 =head1 VERSION
 
-version 1.102380
+version 1.102430
 
 =head1 SYNOPSIS
 
@@ -144,6 +154,15 @@ The distribution name
 The distribution version
 
 =back
+
+=head1 METHODS
+
+=head2 tag
+
+    my $tag = $plugin->tag;
+
+Return the tag that will be / has been applied by the plugin. That is,
+returns C<tag_format> as completed with the real values.
 
 =for Pod::Coverage after_release
     before_release
