@@ -10,13 +10,14 @@ my %module_build_args = (
     'Carp' => '0',
     'Dist::Zilla::Tester' => '0',
     'English' => '0',
+    'File::Copy::Recursive' => '0',
     'File::Find' => '0',
+    'File::pushd' => '0',
     'Module::Build' => '0.3601',
     'Path::Class' => '0',
     'Scalar::Util' => '0',
     'Test::Exception' => '0',
-    'Test::More' => '0.94',
-    'version' => '0'
+    'Test::More' => '0.94'
   },
   'configure_requires' => {
     'Module::Build' => '0.3601'
@@ -26,7 +27,7 @@ my %module_build_args = (
     'Jerome Quelin'
   ],
   'dist_name' => 'Dist-Zilla-Plugin-Git',
-  'dist_version' => '1.102430',
+  'dist_version' => '1.102810',
   'license' => 'perl',
   'module_name' => 'Dist::Zilla::Plugin::Git',
   'recommends' => {},
@@ -35,12 +36,13 @@ my %module_build_args = (
     'Class::MOP' => '0',
     'Cwd' => '0',
     'DateTime' => '0',
-    'Dist::Zilla' => '2.100880',
+    'Dist::Zilla' => '4',
     'Dist::Zilla::Role::AfterBuild' => '0',
     'Dist::Zilla::Role::AfterMint' => '0',
     'Dist::Zilla::Role::AfterRelease' => '0',
     'Dist::Zilla::Role::BeforeRelease' => '0',
     'Dist::Zilla::Role::PluginBundle' => '0',
+    'Dist::Zilla::Role::VersionProvider' => '0',
     'File::Spec::Functions' => '0',
     'File::Temp' => '0',
     'File::chdir' => '0',
@@ -52,7 +54,10 @@ my %module_build_args = (
     'MooseX::Has::Sugar' => '0',
     'MooseX::Types::Moose' => '0',
     'String::Formatter' => '0',
-    'perl' => '5.010'
+    'Version::Next' => '0',
+    'namespace::autoclean' => '0.09',
+    'perl' => '5.010',
+    'version' => '0.80'
   },
   'script_files' => []
 );
