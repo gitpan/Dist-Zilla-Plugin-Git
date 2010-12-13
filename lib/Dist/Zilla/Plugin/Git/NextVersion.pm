@@ -11,7 +11,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::NextVersion;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '1.102810';
+  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '1.103470';
 }
 # ABSTRACT: provide a version number by bumping the last git release tag
 
@@ -38,6 +38,8 @@ sub provide_version {
 
   # override (or maybe needed to initialize)
   return $ENV{V} if exists $ENV{V};
+
+  local $/ = "\n"; # Force record separator to be single newline
 
   my $git  = Git::Wrapper->new('.');
   my $regexp = $self->version_regexp;
@@ -73,7 +75,7 @@ Dist::Zilla::Plugin::Git::NextVersion - provide a version number by bumping the 
 
 =head1 VERSION
 
-version 1.102810
+version 1.103470
 
 =head1 SYNOPSIS
 

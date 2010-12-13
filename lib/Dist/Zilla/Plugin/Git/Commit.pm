@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::Commit::VERSION = '1.102810';
+  $Dist::Zilla::Plugin::Git::Commit::VERSION = '1.103470';
 }
 # ABSTRACT: commit dirty files
 
@@ -27,9 +27,11 @@ use String::Formatter method_stringf => {
   codes => {
     c => sub { $_[0]->_get_changes },
     d => sub { require DateTime;
-               DateTime->now->format_cldr($_[1] || 'dd-MMM-yyyy') },
+               DateTime->now(time_zone => $_[0]->time_zone)
+                       ->format_cldr($_[1] || 'dd-MMM-yyyy') },
     n => sub { "\n" },
     N => sub { $_[0]->zilla->name },
+    t => sub { $_[0]->is_trial ? (defined $_[1] ? $_[1] : '-TRIAL') : '' },
     v => sub { $_[0]->zilla->version },
   },
 };
@@ -41,6 +43,7 @@ with 'Dist::Zilla::Role::Git::DirtyFiles';
 # -- attributes
 
 has commit_msg => ( ro, isa=>Str, default => 'v%v%n%n%c' );
+has time_zone  => ( ro, isa=>Str, default => 'local' );
 
 
 # -- public methods
@@ -107,7 +110,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 1.102810
+version 1.103470
 
 =head1 SYNOPSIS
 
@@ -127,14 +130,17 @@ The plugin accepts the following options:
 
 =over 4
 
-=item * changelog - the name of your changelog file. defaults to F<Changes>.
+=item * changelog - the name of your changelog file. Defaults to F<Changes>.
 
 =item * allow_dirty - a file that will be checked in if it is locally
 modified.  This option may appear multiple times.  The default
 list is F<dist.ini> and the changelog file given by C<changelog>.
 
-=item * commit_msg - the commit message to use. defaults to
+=item * commit_msg - the commit message to use. Defaults to
 C<v%v%n%n%c>, meaning the version number and the list of changes.
+
+=item * time_zone - the time zone to use with C<%d>.  Can be any
+time zone name accepted by DateTime.  Defaults to C<local>.
 
 =back
 
@@ -158,6 +164,11 @@ a newline
 =item C<%N>
 
 the distribution name
+
+=item C<%{-TRIAL}t>
+
+Expands to -TRIAL (or any other supplied string) if this is a trial
+release, or the empty string if not.  A bare C<%t> means C<%{-TRIAL}t>.
 
 =item C<%v>
 
