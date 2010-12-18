@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Push;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::Push::VERSION = '1.103500';
+  $Dist::Zilla::Plugin::Git::Push::VERSION = '1.103520';
 }
 # ABSTRACT: push current branch
 
@@ -59,7 +59,7 @@ Dist::Zilla::Plugin::Git::Push - push current branch
 
 =head1 VERSION
 
-version 1.103500
+version 1.103520
 
 =head1 SYNOPSIS
 

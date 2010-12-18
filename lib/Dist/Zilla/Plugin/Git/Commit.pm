@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::Commit::VERSION = '1.103500';
+  $Dist::Zilla::Plugin::Git::Commit::VERSION = '1.103520';
 }
 # ABSTRACT: commit dirty files
 
@@ -31,7 +31,8 @@ use String::Formatter method_stringf => {
                        ->format_cldr($_[1] || 'dd-MMM-yyyy') },
     n => sub { "\n" },
     N => sub { $_[0]->zilla->name },
-    t => sub { $_[0]->is_trial ? (defined $_[1] ? $_[1] : '-TRIAL') : '' },
+    t => sub { $_[0]->zilla->is_trial
+                   ? (defined $_[1] ? $_[1] : '-TRIAL') : '' },
     v => sub { $_[0]->zilla->version },
   },
 };
@@ -110,7 +111,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 1.103500
+version 1.103520
 
 =head1 SYNOPSIS
 
