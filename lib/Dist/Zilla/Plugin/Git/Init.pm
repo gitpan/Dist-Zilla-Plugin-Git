@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Init;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::Init::VERSION = '1.103520';
+  $Dist::Zilla::Plugin::Git::Init::VERSION = '1.110330';
 }
 # ABSTRACT: initialize git repository on dzil new
 
@@ -88,7 +88,7 @@ Dist::Zilla::Plugin::Git::Init - initialize git repository on dzil new
 
 =head1 VERSION
 
-version 1.103520
+version 1.110330
 
 =head1 SYNOPSIS
 
@@ -144,7 +144,7 @@ the name in lower case or upper case, respectively.
 
 =head1 AUTHOR
 
-Jerome Quelin
+  Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 

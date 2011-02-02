@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::CommitBuild;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '1.103520';
+  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '1.110330';
 }
 # ABSTRACT: checkin build results on separate branch
 
@@ -139,7 +139,7 @@ Dist::Zilla::Plugin::Git::CommitBuild - checkin build results on separate branch
 
 =head1 VERSION
 
-version 1.103520
+version 1.110330
 
 =head1 SYNOPSIS
 
@@ -196,7 +196,7 @@ This option supports three formatting codes:
 
 =head1 AUTHOR
 
-Jerome Quelin
+  Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 

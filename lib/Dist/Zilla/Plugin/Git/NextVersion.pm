@@ -11,7 +11,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::NextVersion;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '1.103520';
+  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '1.110330';
 }
 # ABSTRACT: provide a version number by bumping the last git release tag
 
@@ -75,7 +75,7 @@ Dist::Zilla::Plugin::Git::NextVersion - provide a version number by bumping the 
 
 =head1 VERSION
 
-version 1.103520
+version 1.110330
 
 =head1 SYNOPSIS
 
@@ -119,7 +119,7 @@ the last tag is 0.005 and you want to jump to 1.000 you can set V = 1.000.
 
 =head1 AUTHOR
 
-Jerome Quelin
+  Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 
