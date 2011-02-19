@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::Commit::VERSION = '1.110480';
+  $Dist::Zilla::Plugin::Git::Commit::VERSION = '1.110500';
 }
 # ABSTRACT: commit dirty files
 
@@ -21,6 +21,7 @@ use Git::Wrapper;
 use Moose;
 use MooseX::Has::Sugar;
 use MooseX::Types::Moose qw{ Str };
+use Path::Class::Dir ();
 
 use String::Formatter method_stringf => {
   -as => '_format_string',
@@ -45,9 +46,11 @@ with 'Dist::Zilla::Role::Git::DirtyFiles';
 
 has commit_msg => ( ro, isa=>Str, default => 'v%v%n%n%c' );
 has time_zone  => ( ro, isa=>Str, default => 'local' );
-
+has add_files_in  => ( ro, isa=>'ArrayRef[Str]', default => sub { [] } );
 
 # -- public methods
+
+sub mvp_multivalue_args { qw( add_files_in ) }
 
 sub after_release {
     my $self = shift;
@@ -59,7 +62,22 @@ sub after_release {
     # otherwise before_release would have failed, ending the release
     # process.
     @output = sort { lc $a cmp lc $b } $self->list_dirty_files($git, 1);
-    return unless @output;
+
+    # add any other untracked files to the commit list
+    if ( @{ $self->add_files_in } ) {
+        my @untracked_files = $git->ls_files( { others=>1, 'exclude-standard'=>1 } );
+        foreach my $f ( @untracked_files ) {
+            foreach my $path ( @{ $self->add_files_in } ) {
+                if ( Path::Class::Dir->new( $path )->subsumes( $f ) ) {
+                    push( @output, $f );
+                    last;
+                }
+            }
+        }
+    }
+
+    # if nothing to commit, we're done!
+    return unless @output;    
 
     # write commit message in a temp file
     my ($fh, $filename) = tempfile( 'DZP-git.XXXX', UNLINK => 1 );
@@ -111,7 +129,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 1.110480
+version 1.110500
 
 =head1 SYNOPSIS
 
@@ -136,6 +154,14 @@ The plugin accepts the following options:
 =item * allow_dirty - a file that will be checked in if it is locally
 modified.  This option may appear multiple times.  The default
 list is F<dist.ini> and the changelog file given by C<changelog>.
+
+=item * add_files_in - a path that will have its new files checked in.
+This option may appear multiple times. This is used to add files
+generated during build-time to the repository, for example. The default
+list is empty.
+
+Note: The files have to be generated between those phases: BeforeRelease
+E<lt>-E<gt> AfterRelease, and after Git::Check + before Git::Commit.
 
 =item * commit_msg - the commit message to use. Defaults to
 C<v%v%n%n%c>, meaning the version number and the list of changes.
@@ -184,7 +210,7 @@ the distribution version
 This method returns the commit message.  The default implementation
 reads the Changes file to get the list of changes in the just-released version.
 
-=for Pod::Coverage after_release
+=for Pod::Coverage after_release mvp_multivalue_args
 
 =head1 AUTHOR
 

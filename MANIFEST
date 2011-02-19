@@ -27,6 +27,7 @@ t/000-report-versions-tiny.t
 t/1-check.t
 t/2-commit-build-custom.t
 t/2-commit-build.t
+t/2-commit-dirtydir.t
 t/2-commit-ws.t
 t/2-commit.t
 t/3-tag.t
@@ -41,10 +42,13 @@ t/commit-build-custom/Changes
 t/commit-build-custom/dist.ini
 t/commit-build/Changes
 t/commit-build/dist.ini
+t/commit-dirtydir/Changes
+t/commit-dirtydir/dist.ini
 t/commit-ws/Changes
 t/commit-ws/dist.ini
 t/commit/Changes
 t/commit/dist.ini
+t/lib/Dist/Zilla/Plugin/MyTestArchiver.pm
 t/push-multi/Changes
 t/push-multi/dist.ini
 t/push/Changes
