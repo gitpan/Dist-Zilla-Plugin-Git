@@ -11,7 +11,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::NextVersion;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '1.110500';
+  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '1.111460';
 }
 # ABSTRACT: provide a version number by bumping the last git release tag
 
@@ -45,12 +45,12 @@ sub provide_version {
   my $regexp = $self->version_regexp;
 
   my @tags = $git->tag;
+  @tags = map { /$regexp/ ? $1 : () } @tags;
   return $self->first_version unless @tags;
 
   # find highest version from tags
   my ($last_ver) =  sort { version->parse($b) <=> version->parse($a) }
-  grep { eval { version->parse($_) }  }
-  map  { /$regexp/ ? $1 : ()          } @tags;
+  grep { eval { version->parse($_) }  } @tags;
 
   $self->log_fatal("Could not determine last version from tags")
   unless defined $last_ver;
@@ -75,7 +75,7 @@ Dist::Zilla::Plugin::Git::NextVersion - provide a version number by bumping the 
 
 =head1 VERSION
 
-version 1.110500
+version 1.111460
 
 =head1 SYNOPSIS
 
@@ -119,7 +119,7 @@ the last tag is 0.005 and you want to jump to 1.000 you can set V = 1.000.
 
 =head1 AUTHOR
 
-  Jerome Quelin
+Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 

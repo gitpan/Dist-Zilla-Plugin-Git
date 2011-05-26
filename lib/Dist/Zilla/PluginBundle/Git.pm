@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::PluginBundle::Git;
 BEGIN {
-  $Dist::Zilla::PluginBundle::Git::VERSION = '1.110500';
+  $Dist::Zilla::PluginBundle::Git::VERSION = '1.111460';
 }
 # ABSTRACT: all git plugins in one go
 
@@ -66,7 +66,7 @@ Dist::Zilla::PluginBundle::Git - all git plugins in one go
 
 =head1 VERSION
 
-version 1.110500
+version 1.111460
 
 =head1 SYNOPSIS
 
@@ -97,7 +97,7 @@ The options are passed through to the plugins.
 
 =head1 AUTHOR
 
-  Jerome Quelin
+Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 

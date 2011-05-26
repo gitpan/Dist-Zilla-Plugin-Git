@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::CommitBuild;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '1.110500';
+  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '1.111460';
 }
 # ABSTRACT: checkin build results on separate branch
 
@@ -148,7 +148,7 @@ Dist::Zilla::Plugin::Git::CommitBuild - checkin build results on separate branch
 
 =head1 VERSION
 
-version 1.110500
+version 1.111460
 
 =head1 SYNOPSIS
 
@@ -216,7 +216,7 @@ Defaults to the same as C<message>.
 
 =head1 AUTHOR
 
-  Jerome Quelin
+Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 

@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Role::Git::DirtyFiles;
 BEGIN {
-  $Dist::Zilla::Role::Git::DirtyFiles::VERSION = '1.110500';
+  $Dist::Zilla::Role::Git::DirtyFiles::VERSION = '1.111460';
 }
 # ABSTRACT: provide the allow_dirty & changelog attributes
 
@@ -70,7 +70,7 @@ Dist::Zilla::Role::Git::DirtyFiles - provide the allow_dirty & changelog attribu
 
 =head1 VERSION
 
-version 1.110500
+version 1.111460
 
 =head1 DESCRIPTION
 
@@ -106,7 +106,7 @@ In scalar context, returns the number of dirty files.
 
 =head1 AUTHOR
 
-  Jerome Quelin
+Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 

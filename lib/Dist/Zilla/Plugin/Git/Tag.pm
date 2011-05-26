@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Tag;
 BEGIN {
-  $Dist::Zilla::Plugin::Git::Tag::VERSION = '1.110500';
+  $Dist::Zilla::Plugin::Git::Tag::VERSION = '1.111460';
 }
 # ABSTRACT: tag the new version
 
@@ -94,7 +94,7 @@ Dist::Zilla::Plugin::Git::Tag - tag the new version
 
 =head1 VERSION
 
-version 1.110500
+version 1.111460
 
 =head1 SYNOPSIS
 
@@ -181,7 +181,7 @@ returns C<tag_format> as completed with the real values.
 
 =head1 AUTHOR
 
-  Jerome Quelin
+Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 
