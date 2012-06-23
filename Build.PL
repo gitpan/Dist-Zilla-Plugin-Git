@@ -28,7 +28,7 @@ my %module_build_args = (
     "Jerome Quelin"
   ],
   "dist_name" => "Dist-Zilla-Plugin-Git",
-  "dist_version" => "1.121010",
+  "dist_version" => "1.121750",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::Git",
   "recommends" => {},
@@ -64,7 +64,9 @@ my %module_build_args = (
     "Path::Class" => 0,
     "Path::Class::Dir" => 0,
     "String::Formatter" => 0,
+    "Try::Tiny" => 0,
     "Version::Next" => 0,
+    "autodie" => 0,
     "namespace::autoclean" => "0.09",
     "perl" => "5.010",
     "strict" => 0,
