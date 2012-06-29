@@ -8,7 +8,7 @@
 #
 package Dist::Zilla::Role::Git::Repo;
 {
-  $Dist::Zilla::Role::Git::Repo::VERSION = '1.121800';
+  $Dist::Zilla::Role::Git::Repo::VERSION = '1.121810';
 }
 
 # ABSTRACT: Provide repository information for Git plugins
@@ -31,7 +31,7 @@ Dist::Zilla::Role::Git::Repo - Provide repository information for Git plugins
 
 =head1 VERSION
 
-version 1.121800
+version 1.121810
 
 =head1 DESCRIPTION
 

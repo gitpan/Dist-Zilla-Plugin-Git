@@ -8,7 +8,7 @@
 #
 package Dist::Zilla::Plugin::Git::GatherDir;
 {
-  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '1.121800';
+  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '1.121810';
 }
 # ABSTRACT: gather all tracked files in a Git working directory
 use Moose;
@@ -22,6 +22,7 @@ use Git::Wrapper;
 use File::Find::Rule;
 use File::HomeDir;
 use File::Spec;
+use List::AllUtils qw(uniq);
 use Path::Class;
 
 use namespace::autoclean;
@@ -38,7 +39,7 @@ override gather_files => sub {
   my $git = Git::Wrapper->new($root);
 
   my @files;
-  FILE: for my $filename ($git->ls_files) {
+  FILE: for my $filename (uniq $git->ls_files) {
 
     my $file = file($filename)->relative($root);
 
@@ -85,7 +86,7 @@ Dist::Zilla::Plugin::Git::GatherDir - gather all tracked files in a Git working 
 
 =head1 VERSION
 
-version 1.121800
+version 1.121810
 
 =head1 DESCRIPTION
 
