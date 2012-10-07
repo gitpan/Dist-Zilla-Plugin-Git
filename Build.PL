@@ -9,7 +9,9 @@ my %module_build_args = (
   "build_requires" => {
     "Dist::Zilla::Role::Releaser" => 0,
     "Dist::Zilla::Tester" => 0,
+    "Exporter" => 0,
     "File::Copy" => 0,
+    "File::Copy::Recursive" => 0,
     "File::Find" => 0,
     "File::Path" => "2.07",
     "File::Which" => 0,
@@ -27,7 +29,7 @@ my %module_build_args = (
     "Jerome Quelin"
   ],
   "dist_name" => "Dist-Zilla-Plugin-Git",
-  "dist_version" => "1.122770",
+  "dist_version" => "2.000",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::Git",
   "recommends" => {},

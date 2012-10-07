@@ -5,7 +5,9 @@ author:
 build_requires:
   Dist::Zilla::Role::Releaser: 0
   Dist::Zilla::Tester: 0
+  Exporter: 0
   File::Copy: 0
+  File::Copy::Recursive: 0
   File::Find: 0
   File::Path: 2.07
   File::Which: 0
@@ -17,49 +19,53 @@ build_requires:
 configure_requires:
   Module::Build: 0.3601
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300023, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 4.300024, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: Dist-Zilla-Plugin-Git
+no_index:
+  directory:
+    - corpus
+    - t
 provides:
   Dist::Zilla::Plugin::Git:
     file: lib/Dist/Zilla/Plugin/Git.pm
-    version: 1.122770
+    version: 2.000
   Dist::Zilla::Plugin::Git::Check:
     file: lib/Dist/Zilla/Plugin/Git/Check.pm
-    version: 1.122770
+    version: 2.000
   Dist::Zilla::Plugin::Git::Commit:
     file: lib/Dist/Zilla/Plugin/Git/Commit.pm
-    version: 1.122770
+    version: 2.000
   Dist::Zilla::Plugin::Git::CommitBuild:
     file: lib/Dist/Zilla/Plugin/Git/CommitBuild.pm
-    version: 1.122770
+    version: 2.000
   Dist::Zilla::Plugin::Git::GatherDir:
     file: lib/Dist/Zilla/Plugin/Git/GatherDir.pm
-    version: 1.122770
+    version: 2.000
   Dist::Zilla::Plugin::Git::Init:
     file: lib/Dist/Zilla/Plugin/Git/Init.pm
-    version: 1.122770
+    version: 2.000
   Dist::Zilla::Plugin::Git::NextVersion:
     file: lib/Dist/Zilla/Plugin/Git/NextVersion.pm
-    version: 1.122770
+    version: 2.000
   Dist::Zilla::Plugin::Git::Push:
     file: lib/Dist/Zilla/Plugin/Git/Push.pm
-    version: 1.122770
+    version: 2.000
   Dist::Zilla::Plugin::Git::Tag:
     file: lib/Dist/Zilla/Plugin/Git/Tag.pm
-    version: 1.122770
+    version: 2.000
   Dist::Zilla::PluginBundle::Git:
     file: lib/Dist/Zilla/PluginBundle/Git.pm
-    version: 1.122770
+    version: 2.000
   Dist::Zilla::Role::Git::DirtyFiles:
     file: lib/Dist/Zilla/Role/Git/DirtyFiles.pm
-    version: 1.122770
+    version: 2.000
   Dist::Zilla::Role::Git::Repo:
     file: lib/Dist/Zilla/Role/Git/Repo.pm
-    version: 1.122770
+    version: 2.000
 requires:
   Class::MOP: 0
   Cwd: 0
@@ -108,77 +114,71 @@ resources:
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-Git/
   repository: git://github.com/madsen/dist-zilla-plugin-git.git
   x_MailingList: http://www.listbox.com/subscribe/?list_id=139292
-version: 1.122770
+version: 2.000
 x_Dist_Zilla:
+  perl:
+    version: 5.014002
   plugins:
     -
       class: Dist::Zilla::Plugin::MetaResources
       name: MetaResources
-      version: 4.300023
+      version: 4.300024
     -
-      class: Dist::Zilla::Plugin::AutoVersion
-      name: '@Author::JQUELIN/AutoVersion'
-      version: 4.300023
+      class: Dist::Zilla::Plugin::MetaNoIndex
+      name: MetaNoIndex
+      version: 4.300024
+    -
+      class: Dist::Zilla::Plugin::Git::NextVersion
+      name: '@Author::JQUELIN/Git::NextVersion'
+      version: ~
     -
       class: Dist::Zilla::Plugin::GatherDir
       name: '@Author::JQUELIN/GatherDir'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::Test::Compile
       name: '@Author::JQUELIN/Test::Compile'
       version: 1.112820
     -
-      class: Dist::Zilla::Plugin::HasVersionTests
-      name: '@Author::JQUELIN/HasVersionTests'
-      version: 1.101420
-    -
-      class: Dist::Zilla::Plugin::Test::Kwalitee
-      name: '@Author::JQUELIN/Test::Kwalitee'
-      version: 2.03
-    -
-      class: Dist::Zilla::Plugin::Test::MinimumVersion
-      name: '@Author::JQUELIN/Test::MinimumVersion'
-      version: 2.000002
-    -
       class: Dist::Zilla::Plugin::PodCoverageTests
       name: '@Author::JQUELIN/PodCoverageTests'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::PodSyntaxTests
       name: '@Author::JQUELIN/PodSyntaxTests'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::ReportVersions::Tiny
       name: '@Author::JQUELIN/ReportVersions::Tiny'
-      version: 1.05
+      version: 1.06
     -
       class: Dist::Zilla::Plugin::PruneCruft
       name: '@Author::JQUELIN/PruneCruft'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::PruneFiles
       name: '@Author::JQUELIN/PruneFiles'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::ManifestSkip
       name: '@Author::JQUELIN/ManifestSkip'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::AutoPrereqs
       name: '@Author::JQUELIN/AutoPrereqs'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::ExtraTests
       name: '@Author::JQUELIN/ExtraTests'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::NextRelease
       name: '@Author::JQUELIN/NextRelease'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::PkgVersion
       name: '@Author::JQUELIN/PkgVersion'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::PodWeaver
       name: '@Author::JQUELIN/PodWeaver'
@@ -190,11 +190,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ExecDir
       name: '@Author::JQUELIN/ExecDir'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::ShareDir
       name: '@Author::JQUELIN/ShareDir'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::Bugtracker
       name: '@Author::JQUELIN/Bugtracker'
@@ -214,35 +214,51 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaConfig
       name: '@Author::JQUELIN/MetaConfig'
-      version: 4.300023
+      version: 4.300024
+    -
+      class: Dist::Zilla::Plugin::HelpWanted
+      name: '@Author::JQUELIN/HelpWanted'
+      version: 0.2.1
     -
       class: Dist::Zilla::Plugin::License
       name: '@Author::JQUELIN/License'
-      version: 4.300023
+      version: 4.300024
+    -
+      class: Dist::Zilla::Plugin::Covenant
+      name: '@Author::JQUELIN/Covenant'
+      version: 0.1.0
     -
       class: Dist::Zilla::Plugin::MetaYAML
       name: '@Author::JQUELIN/MetaYAML'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::MetaJSON
       name: '@Author::JQUELIN/MetaJSON'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::ModuleBuild
       name: '@Author::JQUELIN/ModuleBuild'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::Readme
       name: '@Author::JQUELIN/Readme'
-      version: 4.300023
+      version: 4.300024
+    -
+      class: Dist::Zilla::Plugin::ReadmeMarkdownFromPod
+      name: '@Author::JQUELIN/ReadmeMarkdownFromPod'
+      version: 0.120120
     -
       class: Dist::Zilla::Plugin::Manifest
       name: '@Author::JQUELIN/Manifest'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::CheckChangeLog
       name: '@Author::JQUELIN/CheckChangeLog'
       version: 0.01
+    -
+      class: Dist::Zilla::Plugin::TestRelease
+      name: '@Author::JQUELIN/TestRelease'
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::Git::Check
       name: '@Author::JQUELIN/Git::Check'
@@ -252,16 +268,8 @@ x_Dist_Zilla:
       name: '@Author::JQUELIN/Git::Commit'
       version: ~
     -
-      class: Dist::Zilla::Plugin::Git::CommitBuild
-      name: '@Author::JQUELIN/Git::CommitBuild'
-      version: ~
-    -
       class: Dist::Zilla::Plugin::Git::Tag
-      name: '@Author::JQUELIN/TagMaster'
-      version: ~
-    -
-      class: Dist::Zilla::Plugin::Git::Tag
-      name: '@Author::JQUELIN/TagRelease'
+      name: '@Author::JQUELIN/Git::Tag'
       version: ~
     -
       class: Dist::Zilla::Plugin::Git::Push
@@ -270,33 +278,39 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::UploadToCPAN
       name: '@Author::JQUELIN/UploadToCPAN'
-      version: 4.300023
+      version: 4.300024
+    -
+      class: Dist::Zilla::Plugin::ConfirmRelease
+      name: ConfirmRelease
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':IncModules'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':TestFiles'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ExecFiles'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ShareFiles'
-      version: 4.300023
+      version: 4.300024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':MainModule'
-      version: 4.300023
+      version: 4.300024
   zilla:
     class: Dist::Zilla::Dist::Builder
     config:
       is_trial: 0
-    version: 4.300023
+    version: 4.300024
+x_author_pledge:
+  version: 1

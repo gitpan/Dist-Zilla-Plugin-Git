@@ -1,3 +1,4 @@
+AUTHOR_PLEDGE
 Build.PL
 Changes
 LICENSE
@@ -6,6 +7,7 @@ MANIFEST.SKIP
 META.json
 META.yml
 README
+README.mkdn
 corpus/check/Changes
 corpus/check/foobar
 corpus/commit-build-custom/Changes
@@ -53,6 +55,7 @@ lib/Dist/Zilla/Role/Git/Repo.pm
 t/00-compile.t
 t/000-report-git-version.t
 t/000-report-versions-tiny.t
+t/Util.pm
 t/check.t
 t/commit-build-custom.t
 t/commit-build.t
@@ -63,9 +66,6 @@ t/gatherdir.t
 t/lib/Dist/Zilla/Plugin/MyTestArchiver.pm
 t/push-multi.t
 t/push.t
-t/release-has-version.t
-t/release-kwalitee.t
-t/release-minimum-version.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 t/repo-dir.t
