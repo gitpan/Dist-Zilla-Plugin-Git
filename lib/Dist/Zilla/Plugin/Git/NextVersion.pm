@@ -11,7 +11,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::NextVersion;
 {
-  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.001';
+  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.002';
 }
 # ABSTRACT: provide a version number by bumping the last git release tag
 
@@ -48,14 +48,21 @@ has version_by_branch  => ( is => 'ro', isa=>'Bool', default => 0 );
 sub _versions_from_tags {
   my ($regexp, $tags) = @_;
 
-  return [ sort map { /$regexp/ ? try { version->parse($1) } : () } @$tags ];
+  # WARNING: The quotes in "$1" are necessary, because version doesn't
+  # call get magic properly.  Unfortunately, I haven't been able to
+  # reproduce this in a test.
+  return [ sort map { /$regexp/ ? try { version->parse("$1") } : () } @$tags ];
 } # end _versions_from_tags
 
 has _all_versions => (
   is => 'ro',  isa=>'ArrayRef',  init_arg => undef,  lazy => 1,
   default => sub {
     my $self = shift;
-    _versions_from_tags($self->version_regexp, [ $self->git->tag ]);
+    my $v = _versions_from_tags($self->version_regexp, [ $self->git->tag ]);
+    if ($self->logger->get_debug) {
+      $self->log_debug("Found version $_") for @$v;
+    }
+    $v;
   }
 );
 
@@ -90,8 +97,11 @@ sub _last_version {
         /^\s*\((.+)\)/ or next;
         push @tags, split /,\s*/, $1;
       } # end for lines from git log
-      $last_ver = _max_version(_versions_from_tags($self->version_regexp,
-                                                   \@tags));
+      my $versions = _versions_from_tags($self->version_regexp, \@tags);
+      if ($self->logger->get_debug) {
+        $self->log_debug("Found version $_ on branch") for @$versions;
+      }
+      $last_ver = _max_version($versions);
     };
     if (defined $last_ver) {
       ($head) = $git->rev_parse('HEAD') unless $head;
@@ -170,7 +180,7 @@ Dist::Zilla::Plugin::Git::NextVersion - provide a version number by bumping the 
 
 =head1 VERSION
 
-version 2.001
+version 2.002
 
 =head1 SYNOPSIS
 
@@ -208,7 +218,7 @@ is used as the first version for the distribution.  It defaults to "0.001".
 
 C<version_by_branch> - if true, consider only tags on the current
 branch when looking for the previous version.  If you have a
-maintenance branch for stable releases and a developement branch for
+maintenance branch for stable releases and a development branch for
 trial releases, you should set this to 1.  (You'll also need git
 version 1.6.1 or later.)  The default is to look at all tags, because
 finding the tags reachable from a branch is a more expensive operation
