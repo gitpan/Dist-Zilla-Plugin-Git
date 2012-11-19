@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::CommitBuild;
 {
-  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '2.002';
+  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '2.003';
 }
 # ABSTRACT: checkin build results on separate branch
 
@@ -36,13 +36,13 @@ use String::Formatter (
 	method_stringf => {
 		-as   => '_format_branch',
 		codes => {
-			b => sub { (shift->name_rev( '--name-only', 'HEAD' ))[0] },
+			b => sub { shift->_source_branch },
 		},
 	},
 	method_stringf => {
 		-as   => '_format_message',
 		codes => {
-			b => sub { (shift->git->name_rev( '--name-only', 'HEAD' ))[0] },
+			b => sub { shift->_source_branch },
 			h => sub { (shift->git->rev_parse( '--short',    'HEAD' ))[0] },
 			H => sub { (shift->git->rev_parse('HEAD'))[0] },
 		    t => sub { shift->zilla->is_trial ? '-TRIAL' : '' },
@@ -64,6 +64,22 @@ has release_branch  => ( ro, isa => Str, required => 0 );
 has message => ( ro, isa => Str, default => 'Build results of %h (on %b)', required => 1 );
 has release_message => ( ro, isa => Str, lazy => 1, builder => '_build_release_message' );
 has build_root => ( rw, coerce => 1, isa => Dir );
+
+has _source_branch => (
+    is      => 'ro',
+    isa     => 'Str',
+    lazy    => 1,
+    init_arg=> undef,
+    default => sub {
+        ($_[0]->git->name_rev( '--name-only', 'HEAD' ))[0];
+    },
+);
+
+has multiple_inheritance => (
+    is      => 'ro',
+    isa     => 'Bool',
+    default => 0,
+);
 
 # -- attribute builders
 
@@ -95,7 +111,7 @@ sub _commit_build {
     my $tmp_dir = File::Temp->newdir( CLEANUP => 1) ;
     my $src     = $self->git;
 
-    my $target_branch = _format_branch( $branch, $src );
+    my $target_branch = _format_branch( $branch, $self );
     my $dir           = $self->build_root;
 
     # returns the sha1 of the created tree object
@@ -111,9 +127,12 @@ sub _commit_build {
         return;
     }
 
-    my @parents = grep {
-        eval { $src->rev_parse({ 'q' => 1, 'verify'=>1}, $_ ) }
-    } $target_branch;
+    my @parents = (
+        ( $self->_source_branch ) x $self->multiple_inheritance,
+        grep {
+            eval { $src->rev_parse({ 'q' => 1, 'verify'=>1}, $_ ) }
+        } $target_branch
+    );
 
     ### @parents
 
@@ -166,7 +185,7 @@ Dist::Zilla::Plugin::Git::CommitBuild - checkin build results on separate branch
 
 =head1 VERSION
 
-version 2.002
+version 2.003
 
 =head1 SYNOPSIS
 
@@ -176,6 +195,7 @@ In your F<dist.ini>:
 	; these are the defaults
     branch = build/%b
     message = Build results of %h (on %b)
+    multiple_inheritance = 0
 
 =head1 DESCRIPTION
 
@@ -225,7 +245,16 @@ This option supports five formatting codes:
 
 =item * release_message - L<String::Formatter> string for what
 commit message to use when committing the results of the release.
+
 Defaults to the same as C<message>.
+
+=item * multiple_inheritance - Indicates whether the commit containing
+the build results should have the source commit as a parent.
+
+If false (the default), the build branch will be completely separate
+from the regular code branches.  If set to a true value, commits on a
+build branch will have two parents: the previous build commit and the
+source commit from which the build was generated.
 
 =back
 

@@ -11,7 +11,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::NextVersion;
 {
-  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.002';
+  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.003';
 }
 # ABSTRACT: provide a version number by bumping the last git release tag
 
@@ -49,8 +49,7 @@ sub _versions_from_tags {
   my ($regexp, $tags) = @_;
 
   # WARNING: The quotes in "$1" are necessary, because version doesn't
-  # call get magic properly.  Unfortunately, I haven't been able to
-  # reproduce this in a test.
+  # call get magic properly.
   return [ sort map { /$regexp/ ? try { version->parse("$1") } : () } @$tags ];
 } # end _versions_from_tags
 
@@ -180,7 +179,7 @@ Dist::Zilla::Plugin::Git::NextVersion - provide a version number by bumping the 
 
 =head1 VERSION
 
-version 2.002
+version 2.003
 
 =head1 SYNOPSIS
 
