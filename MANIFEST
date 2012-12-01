@@ -63,6 +63,7 @@ t/commit-build-custom.t
 t/commit-build-src-as-parent.t
 t/commit-build.t
 t/commit-dirtydir.t
+t/commit-message.t
 t/commit-ws.t
 t/commit.t
 t/gatherdir.t

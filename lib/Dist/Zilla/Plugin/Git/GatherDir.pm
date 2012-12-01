@@ -8,7 +8,7 @@
 #
 package Dist::Zilla::Plugin::Git::GatherDir;
 {
-  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '2.003';
+  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '2.004';
 }
 # ABSTRACT: gather all tracked files in a Git working directory
 use Moose;
@@ -45,7 +45,7 @@ override gather_files => sub {
   my $git = Git::Wrapper->new($root);
 
   my @opts;
-  @opts = qw(-co --exclude-standard) if $self->include_untracked;
+  @opts = qw(--cached --others --exclude-standard) if $self->include_untracked;
 
   my @files;
   FILE: for my $filename (uniq $git->ls_files(@opts)) {
@@ -95,7 +95,7 @@ Dist::Zilla::Plugin::Git::GatherDir - gather all tracked files in a Git working 
 
 =head1 VERSION
 
-version 2.003
+version 2.004
 
 =head1 DESCRIPTION
 

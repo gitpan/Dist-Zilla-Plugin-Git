@@ -12,11 +12,13 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
 {
-  $Dist::Zilla::Plugin::Git::Commit::VERSION = '2.003';
+  $Dist::Zilla::Plugin::Git::Commit::VERSION = '2.004';
 }
 # ABSTRACT: commit dirty files
 
+use namespace::autoclean;
 use File::Temp           qw{ tempfile };
+use List::Util           qw{ first };
 use Moose;
 use MooseX::Has::Sugar;
 use MooseX::Types::Moose qw{ Str };
@@ -105,17 +107,29 @@ sub _get_changes {
     my $self = shift;
 
     # parse changelog to find commit message
-    my $changelog = Dist::Zilla::File::OnDisk->new( { name => $self->changelog } );
+    my $cl_name   = $self->changelog;
+    my $changelog = first { $_->name eq $cl_name } @{ $self->zilla->files };
+    unless ($changelog) {
+      $self->log("WARNING: Unable to find $cl_name");
+      return '';
+    }
     my $newver    = $self->zilla->version;
-    my @content   =
-        grep { /^$newver(?:\s+|$)/ ... /^\S/ } # from newver to un-indented
-        split /\n/, $changelog->content;
-    shift @content; # drop the version line
-    # drop unindented last line and trailing blank lines
-    pop @content while ( @content && $content[-1] =~ /^(?:\S|\s*$)/ );
+    $changelog->content =~ /
+      ^\Q$newver\E(?![_.]*[0-9]).*\n # from line beginning with version number
+      ( (?: (?> .* ) (?:\n|\z) )*? ) # capture as few lines as possible
+      (?: (?> \s* ) ^\S | \z )       # until non-indented line or EOF
+    /xm or do {
+      $self->log("WARNING: Unable to find $newver in $cl_name");
+      return '';
+    };
+
+    (my $changes = $1) =~ s/^\s*\n//; # Remove leading blank lines
+
+    $self->log("WARNING: No changes listed under $newver in $cl_name")
+        unless length $changes;
 
     # return commit message
-    return join("\n", @content, ''); # add a final \n
+    return $changes;
 } # end _get_changes
 
 
@@ -131,7 +145,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 2.003
+version 2.004
 
 =head1 SYNOPSIS
 
@@ -146,6 +160,12 @@ Once the release is done, this plugin will record this fact in git by
 committing changelog and F<dist.ini>. The commit message will be taken
 from the changelog for this release.  It will include lines between
 the current version and timestamp and the next non-indented line.
+
+B<Warning:> If you are using Git::Commit in conjunction with the
+L<NextRelease|Dist::Zilla::Plugin::NextRelease> plugin,
+C<[NextRelease]> must come before C<[Git::Commit]> (or C<[@Git]>) in
+your F<dist.ini> or plugin bundle.  Otherwise, Git::Commit will commit
+the F<Changes> file before NextRelease has updated it.
 
 The plugin accepts the following options:
 

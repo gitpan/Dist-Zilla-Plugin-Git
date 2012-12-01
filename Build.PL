@@ -7,6 +7,7 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   "build_requires" => {
+    "Dist::Zilla::File::InMemory" => 0,
     "Dist::Zilla::Role::Releaser" => 0,
     "Dist::Zilla::Tester" => 0,
     "Exporter" => 0,
@@ -16,6 +17,7 @@ my %module_build_args = (
     "File::Path" => "2.07",
     "File::Which" => 0,
     "File::pushd" => 0,
+    "Log::Dispatchouli" => 0,
     "Module::Build" => "0.3601",
     "Test::DZil" => 0,
     "Test::Exception" => 0,
@@ -29,7 +31,7 @@ my %module_build_args = (
     "Jerome Quelin"
   ],
   "dist_name" => "Dist-Zilla-Plugin-Git",
-  "dist_version" => "2.003",
+  "dist_version" => "2.004",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::Git",
   "recommends" => {},
