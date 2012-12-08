@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Check;
 {
-  $Dist::Zilla::Plugin::Git::Check::VERSION = '2.004';
+  $Dist::Zilla::Plugin::Git::Check::VERSION = '2.005';
 }
 # ABSTRACT: check your git repository before releasing
 
@@ -20,13 +20,13 @@ use Moose;
 use namespace::autoclean 0.09;
 use Moose::Util::TypeConstraints qw(enum);
 
-enum('DieWarnIgnore', [qw[ die warn ignore ]]);
+use constant _DieWarnIgnore => do { enum [qw[ die warn ignore ]] };
 
 with 'Dist::Zilla::Role::BeforeRelease';
 with 'Dist::Zilla::Role::Git::Repo';
 with 'Dist::Zilla::Role::Git::DirtyFiles';
 
-has untracked_files => ( is=>'ro', isa=>'DieWarnIgnore', default => 'die' );
+has untracked_files => ( is=>'ro', isa => _DieWarnIgnore, default => 'die' );
 
 # -- public methods
 
@@ -97,7 +97,7 @@ Dist::Zilla::Plugin::Git::Check - check your git repository before releasing
 
 =head1 VERSION
 
-version 2.004
+version 2.005
 
 =head1 SYNOPSIS
 

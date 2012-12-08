@@ -11,7 +11,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::NextVersion;
 {
-  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.004';
+  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.005';
 }
 # ABSTRACT: provide a version number by bumping the last git release tag
 
@@ -35,10 +35,13 @@ with 'Dist::Zilla::Role::Git::Repo';
 
 # -- attributes
 
-subtype 'CoercedRegexp', as 'RegexpRef';
-coerce 'CoercedRegexp', from 'Str', via { qr/$_/ };
+use constant _CoercedRegexp => do {
+    my $tc = subtype as 'RegexpRef';
+    coerce $tc, from 'Str', via { qr/$_/ };
+    $tc;
+};
 
-has version_regexp  => ( is => 'ro', isa=>'CoercedRegexp', coerce => 1,
+has version_regexp  => ( is => 'ro', isa=> _CoercedRegexp, coerce => 1,
                          default => sub { qr/^v(.+)$/ } );
 
 has first_version  => ( is => 'ro', isa=>'Str', default => '0.001' );
@@ -179,7 +182,7 @@ Dist::Zilla::Plugin::Git::NextVersion - provide a version number by bumping the 
 
 =head1 VERSION
 
-version 2.004
+version 2.005
 
 =head1 SYNOPSIS
 
