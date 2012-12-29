@@ -8,7 +8,7 @@
 #
 package Dist::Zilla::Plugin::Git::GatherDir;
 {
-  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '2.005';
+  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '2.006';
 }
 # ABSTRACT: gather all tracked files in a Git working directory
 use Moose;
@@ -95,7 +95,7 @@ Dist::Zilla::Plugin::Git::GatherDir - gather all tracked files in a Git working 
 
 =head1 VERSION
 
-version 2.005
+version 2.006
 
 =head1 DESCRIPTION
 
@@ -150,6 +150,14 @@ pattern (i.e. those reported by C<git ls-files -o --exclude-standard>)
 are also gathered (and you'll probably want to use
 L<Git::Check|Dist::Zilla::Plugin::Git::Check> to ensure all files are
 checked in before a release).
+
+C<include_untracked> requires at least Git 1.5.4, but you should
+probably not use it if your Git is older than 1.6.5.2.  Versions
+before that would not list files matched by your F<.gitignore>, even
+if they were already being tracked by Git (which means they will not
+be gathered, even though they should be).  Whether that is a problem
+depends on the contents of your exclude files (including the global
+one, if any).
 
 =head2 follow_symlinks
 

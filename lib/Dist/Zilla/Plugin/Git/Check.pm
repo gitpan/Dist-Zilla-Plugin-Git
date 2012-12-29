@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Check;
 {
-  $Dist::Zilla::Plugin::Git::Check::VERSION = '2.005';
+  $Dist::Zilla::Plugin::Git::Check::VERSION = '2.006';
 }
 # ABSTRACT: check your git repository before releasing
 
@@ -97,7 +97,7 @@ Dist::Zilla::Plugin::Git::Check - check your git repository before releasing
 
 =head1 VERSION
 
-version 2.005
+version 2.006
 
 =head1 SYNOPSIS
 
