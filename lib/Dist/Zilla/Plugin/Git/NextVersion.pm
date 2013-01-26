@@ -11,12 +11,11 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::NextVersion;
 {
-  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.006';
+  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.007';
 }
 # ABSTRACT: provide a version number by bumping the last git release tag
 
 use Dist::Zilla 4 ();
-use Version::Next ();
 use version 0.80 ();
 
 use Moose;
@@ -151,6 +150,7 @@ sub provide_version {
   return $self->first_version
     unless defined $last_ver;
 
+  require Version::Next;
   my $new_ver  = Version::Next::next_version($last_ver);
   $self->log("Bumping version from $last_ver to $new_ver");
 
@@ -182,7 +182,7 @@ Dist::Zilla::Plugin::Git::NextVersion - provide a version number by bumping the 
 
 =head1 VERSION
 
-version 2.006
+version 2.007
 
 =head1 SYNOPSIS
 

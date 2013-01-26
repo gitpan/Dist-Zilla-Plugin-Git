@@ -20,7 +20,7 @@ my %module_build_args = (
     "Log::Dispatchouli" => 0,
     "Module::Build" => "0.3601",
     "Test::DZil" => 0,
-    "Test::Exception" => 0,
+    "Test::Fatal" => 0,
     "Test::More" => "0.88"
   },
   "configure_requires" => {
@@ -31,7 +31,7 @@ my %module_build_args = (
     "Jerome Quelin"
   ],
   "dist_name" => "Dist-Zilla-Plugin-Git",
-  "dist_version" => "2.006",
+  "dist_version" => "2.007",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::Git",
   "recommends" => {},
@@ -49,8 +49,6 @@ my %module_build_args = (
     "Dist::Zilla::Role::FilePruner" => 0,
     "Dist::Zilla::Role::PluginBundle" => 0,
     "Dist::Zilla::Role::VersionProvider" => 0,
-    "File::Find::Rule" => 0,
-    "File::HomeDir" => 0,
     "File::Spec" => 0,
     "File::Spec::Functions" => 0,
     "File::Temp" => 0,
