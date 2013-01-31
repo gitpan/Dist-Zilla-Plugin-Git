@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Push;
 {
-  $Dist::Zilla::Plugin::Git::Push::VERSION = '2.007';
+  $Dist::Zilla::Plugin::Git::Push::VERSION = '2.008';
 }
 # ABSTRACT: push current branch
 
@@ -49,8 +49,8 @@ sub before_release {
     my @bad_remotes;
 
     # Make sure the remotes we'll be pushing to exist
-    for my $remote ( @{ $self->push_to } ) {
-      $remote =~ s/\s.*//s;     # Discard branch (if specified)
+    for my $remote_spec ( @{ $self->push_to } ) {
+      (my $remote = $remote_spec) =~ s/\s.*//s; # Discard branch (if specified)
       if ($remote =~ m![:/]!) {
         # Appears to be a URL or path, don't check it
         $self->log("Will push to $remote (not checked)");
@@ -90,7 +90,7 @@ Dist::Zilla::Plugin::Git::Push - push current branch
 
 =head1 VERSION
 
-version 2.007
+version 2.008
 
 =head1 SYNOPSIS
 
