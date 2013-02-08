@@ -20,7 +20,7 @@ my %module_build_args = (
     "Log::Dispatchouli" => 0,
     "Module::Build" => "0.3601",
     "Test::DZil" => 0,
-    "Test::Fatal" => 0,
+    "Test::Fatal" => "0.006",
     "Test::More" => "0.88"
   },
   "configure_requires" => {
@@ -31,7 +31,7 @@ my %module_build_args = (
     "Jerome Quelin"
   ],
   "dist_name" => "Dist-Zilla-Plugin-Git",
-  "dist_version" => "2.008",
+  "dist_version" => "2.009",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::Git",
   "recommends" => {},

@@ -1,14 +1,23 @@
 Revision history for Dist::Zilla::Plugin::Git
 
+2.009     2013-02-08 06:03:33 Europe/Paris
+ - add allow_dirty_match option to Git::Check and Git::Commit (graham knop)
+ - change version-by-branch.t to use HEAD~1 instead of HEAD^
+   Should fix test failure on Windows. (christopher madsen)
+ - Test::Fatal 0.006 or better has been required since 2.007,
+   but that wasn't explicit (christopher madsen, reported by jonathan leto)
+
 2.008     2013-01-31 04:06:00 Europe/Paris
  - fix bug introduced in Git::Push 2.007 that broke remotes with
    additional parameters (christopher madsen)
 
 2.007     2013-01-26 18:51:24 Europe/Paris
  - fix rt#82873 - Git::Push should check the remote exists
-   New remotes_must_exist option defaults to true. (christopher madsen)
+   New remotes_must_exist option defaults to true. (christopher madsen,
+   suggested by olivier mengué)
  - switch from Test::Exception to Test::Fatal (christopher madsen)
- - load some dependencies only when needed (rt#82956) (christopher madsen)
+ - load some dependencies only when needed (rt#82956) (christopher madsen,
+   suggested by olivier mengué)
 
 2.006     2012-12-29 23:17:39 Europe/Paris
  - document that the include_untracked option of Git::GatherDir

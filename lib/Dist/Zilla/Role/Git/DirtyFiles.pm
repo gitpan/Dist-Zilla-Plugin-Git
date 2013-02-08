@@ -12,14 +12,14 @@ use warnings;
 
 package Dist::Zilla::Role::Git::DirtyFiles;
 {
-  $Dist::Zilla::Role::Git::DirtyFiles::VERSION = '2.008';
+  $Dist::Zilla::Role::Git::DirtyFiles::VERSION = '2.009';
 }
 # ABSTRACT: provide the allow_dirty & changelog attributes
 
 use Moose::Role;
 use Moose::Autobox;
-use MooseX::Has::Sugar;
-use MooseX::Types::Moose qw{ ArrayRef Str };
+use MooseX::Types::Moose qw{ ArrayRef Str RegexpRef };
+use Moose::Util::TypeConstraints;
 
 use namespace::autoclean;
 use List::Util 'first';
@@ -32,17 +32,29 @@ requires qw(log_fatal repo_root zilla);
 
 
 has allow_dirty => (
-  ro, lazy,
+  is => 'ro', lazy => 1,
   isa     => ArrayRef[Str],
   builder => '_build_allow_dirty',
 );
-has changelog => ( ro, isa=>Str, default => 'Changes' );
+has changelog => ( is => 'ro', isa=>Str, default => 'Changes' );
+
+{
+  my $type = subtype as ArrayRef[RegexpRef];
+  coerce $type, from ArrayRef[Str], via { [map { qr/$_/ } @$_] };
+  has allow_dirty_match => (
+    is => 'ro',
+    lazy => 1,
+    coerce => 1,
+    isa => $type,
+    default => sub { [] },
+  );
+}
 
 around mvp_multivalue_args => sub {
   my ($orig, $self) = @_;
 
   my @start = $self->$orig;
-  return (@start, 'allow_dirty');
+  return (@start, 'allow_dirty', 'allow_dirty_match');
 };
 
 # -- builders & initializers
@@ -81,9 +93,9 @@ sub list_dirty_files
     }
   } # end if git root ne dzil root
 
-  my %allowed = map { $_ => 1 } @filenames;
+  my $allowed = join '|', $self->allow_dirty_match->flatten, map { qr{^\Q$_\E$} } @filenames;
 
-  return grep { $allowed{$_} ? $listAllowed : !$listAllowed }
+  return grep { /$allowed/ ? $listAllowed : !$listAllowed }
       $git->ls_files( { modified=>1, deleted=>1 } );
 } # end list_dirty_files
 
@@ -100,7 +112,7 @@ Dist::Zilla::Role::Git::DirtyFiles - provide the allow_dirty & changelog attribu
 
 =head1 VERSION
 
-version 2.008
+version 2.009
 
 =head1 DESCRIPTION
 

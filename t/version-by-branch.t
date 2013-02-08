@@ -6,7 +6,7 @@ use Path::Class;
 use File::pushd qw(pushd);
 
 use Test::More 0.88;            # done_testing
-use Test::Fatal qw( lives_ok );
+use Test::Fatal 0.006 qw( lives_ok );
 
 use t::Util qw(:DEFAULT throws_ok zilla_version);
 
@@ -156,7 +156,7 @@ is( _zilla_version(qw(HEAD 1.2.6)), "1.2.7", "using (fake) cached 1.2.6 tag" );
 head_last_ver("1.2.6");
 
 # see if it ignores a stale cache
-is( _zilla_version(qw(HEAD^ 1.2.6)), "1.2.5",
+is( _zilla_version(qw(HEAD~1 1.2.6)), "1.2.5",
     "ignoring stale cached 1.2.6 tag" );
 head_last_ver("1.2.4");
 
