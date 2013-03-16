@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::CommitBuild;
 {
-  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '2.009';
+  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '2.010';
 }
 # ABSTRACT: checkin build results on separate branch
 
@@ -107,12 +107,22 @@ sub _commit_build {
     my ( $self, undef, $branch, $message ) = @_;
 
     return unless $branch;
-
     my $tmp_dir = File::Temp->newdir( CLEANUP => 1) ;
+    my $dir     = Path::Class::Dir->new( $tmp_dir->dirname );
     my $src     = $self->git;
 
     my $target_branch = _format_branch( $branch, $self );
-    my $dir           = $self->build_root;
+
+    for my $file ( @{ $self->zilla->files } ) {
+        my ( $name, $content ) = ( $file->name, $file->content );
+        my ( $outfile ) = $dir->file( $name );
+        $outfile->parent->mkpath();
+        my $fd = $outfile->openw;
+        $fd->binmode( ":raw" );
+        $fd->print( $content );
+        $fd->close or die "error closing $outfile: $!";;
+        chmod $file->mode, "$outfile" or die "couldn't chmod $outfile: $!";
+    }
 
     # returns the sha1 of the created tree object
     my $tree = $self->_create_tree($src, $dir);
@@ -185,7 +195,7 @@ Dist::Zilla::Plugin::Git::CommitBuild - checkin build results on separate branch
 
 =head1 VERSION
 
-version 2.009
+version 2.010
 
 =head1 SYNOPSIS
 
