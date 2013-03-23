@@ -1,5 +1,9 @@
 Revision history for Dist::Zilla::Plugin::Git
 
+2.011     2013-03-23 16:19:52 Europe/Paris
+ - fix compatibility with Git::Wrapper 0.028_96 (Don't pass Path::Class
+   objects to Git::Wrapper) (christopher madsen)
+
 2.010     2013-03-16 16:34:22 Europe/Paris
  - fix rt#83891 - Git::CommitBuild commits non-build files
    Git::CommitBuild now writes a fresh copy of the built tree to commit,
