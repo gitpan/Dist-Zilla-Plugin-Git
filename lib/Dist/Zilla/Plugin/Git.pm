@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git;
 {
-  $Dist::Zilla::Plugin::Git::VERSION = '2.012';
+  $Dist::Zilla::Plugin::Git::VERSION = '2.013';
 }
 # ABSTRACT: update your git repository after release
 
@@ -29,12 +29,12 @@ Dist::Zilla::Plugin::Git - update your git repository after release
 
 =head1 VERSION
 
-version 2.012
+version 2.013
 
 =head1 DESCRIPTION
 
 This set of plugins for L<Dist::Zilla> can do interesting things for
-module authors using L<git|http://git- scm.com> to track their work. The
+module authors using Git (L<http://git-scm.com>) to track their work. The
 following plugins are provided in this distribution:
 
 =over 4
@@ -44,6 +44,8 @@ following plugins are provided in this distribution:
 =item * L<Dist::Zilla::Plugin::Git::Commit>
 
 =item * L<Dist::Zilla::Plugin::Git::CommitBuild>
+
+=item * L<Dist::Zilla::Plugin::Git::GatherDir>
 
 =item * L<Dist::Zilla::Plugin::Git::Init>
 

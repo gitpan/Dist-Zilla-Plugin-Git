@@ -7,21 +7,7 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   "build_requires" => {
-    "Dist::Zilla::File::InMemory" => 0,
-    "Dist::Zilla::Role::Releaser" => 0,
-    "Dist::Zilla::Tester" => 0,
-    "Exporter" => 0,
-    "File::Copy" => 0,
-    "File::Copy::Recursive" => 0,
-    "File::Find" => 0,
-    "File::Path" => "2.07",
-    "File::Which" => 0,
-    "File::pushd" => 0,
-    "Log::Dispatchouli" => 0,
-    "Module::Build" => "0.3601",
-    "Test::DZil" => 0,
-    "Test::Fatal" => "0.006",
-    "Test::More" => "0.88"
+    "Module::Build" => "0.3601"
   },
   "configure_requires" => {
     "Module::Build" => "0.3601"
@@ -31,7 +17,7 @@ my %module_build_args = (
     "Jerome Quelin"
   ],
   "dist_name" => "Dist-Zilla-Plugin-Git",
-  "dist_version" => "2.012",
+  "dist_version" => "2.013",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::Git",
   "recommends" => {},
@@ -78,9 +64,38 @@ my %module_build_args = (
     "version" => "0.80",
     "warnings" => 0
   },
-  "script_files" => []
+  "script_files" => [],
+  "test_requires" => {
+    "Dist::Zilla::File::InMemory" => 0,
+    "Dist::Zilla::Role::Releaser" => 0,
+    "Dist::Zilla::Tester" => 0,
+    "Exporter" => 0,
+    "File::Copy" => 0,
+    "File::Copy::Recursive" => 0,
+    "File::Find" => 0,
+    "File::Path" => "2.07",
+    "File::Which" => 0,
+    "File::pushd" => 0,
+    "Log::Dispatchouli" => 0,
+    "Test::DZil" => 0,
+    "Test::Fatal" => "0.006",
+    "Test::More" => "0.88"
+  }
 );
 
+
+unless ( eval { Module::Build->VERSION(0.4004) } ) {
+  my $tr = delete $module_build_args{test_requires};
+  my $br = $module_build_args{build_requires};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
 
 my $build = Module::Build->new(%module_build_args);
 
