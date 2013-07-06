@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git;
 {
-  $Dist::Zilla::Plugin::Git::VERSION = '2.014';
+  $Dist::Zilla::Plugin::Git::VERSION = '2.015'; # TRIAL
 }
 # ABSTRACT: update your git repository after release
 
@@ -29,7 +29,7 @@ Dist::Zilla::Plugin::Git - update your git repository after release
 
 =head1 VERSION
 
-version 2.014
+version 2.015
 
 =head1 DESCRIPTION
 
@@ -59,6 +59,9 @@ following plugins are provided in this distribution:
 
 A L<Dist::Zilla::PluginBundle::Git> bundle is also provided for your
 convenience, check its documentation to see which plugins it will load.
+
+You need Git 1.5.4 or later to use these plugins.  Some plugins
+require a more recent version of Git for certain features.
 
 =head1 SEE ALSO
 
