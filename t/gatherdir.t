@@ -17,7 +17,7 @@ use File::pushd;
 use File::Temp qw{ tempdir };
 use Git::Wrapper;
 use Path::Class;
-use Test::More      tests => 4;
+use Test::More      tests => 5;
 
 use t::Util;
 
@@ -28,19 +28,19 @@ for my $test (
   {
     name   => 'default',
     config => simple_ini('Git::GatherDir'),
-    files  => [ qw(lib/DZT/Sample.pm tracked) ],
+    files  => [ qw(lib/DZT/Sample.pm share/tracked tracked) ],
 
   },
   {
     name   => 'include_dotfiles',
     config => simple_ini([ 'Git::GatherDir', { include_dotfiles => 1 } ]),
-    files  => [ qw(.gitignore .tracked lib/DZT/Sample.pm tracked) ],
+    files  => [ qw(.gitignore .tracked lib/DZT/Sample.pm share/tracked tracked) ],
   },
   {
     name   => 'include_untracked',
     min_git=> '1.5.4',
     config => simple_ini([ 'Git::GatherDir', { include_untracked => 1 } ]),
-    files  => [ qw(dist.ini lib/DZT/Sample.pm tracked untracked) ],
+    files  => [ qw(dist.ini lib/DZT/Sample.pm  share/tracked tracked untracked) ],
 
   },
   {
@@ -49,7 +49,13 @@ for my $test (
     config => simple_ini([ 'Git::GatherDir',
                            { include_dotfiles => 1, include_untracked => 1 } ]),
     files  => [ qw(.gitignore .tracked .untracked dist.ini lib/DZT/Sample.pm
-                   tracked untracked) ],
+                   share/tracked tracked untracked) ],
+  },
+  {
+    name   => 'exclude_filename',
+    config => simple_ini([ 'Git::GatherDir', { exclude_filename => 'tracked' } ]),
+    files  => [ qw(lib/DZT/Sample.pm share/tracked) ],
+
   },
 ) {
  SKIP: {
@@ -62,6 +68,7 @@ for my $test (
           'source/ignored'    => "This is ignored.\n",
           'source/untracked'  => "This is not tracked.\n",
           'source/tracked'    => "This is tracked.\n",
+          'source/share/tracked' => "This is tracked, in a subdir.\n",
           'source/.tracked'   => "This is a tracked dotfile.\n",
           'source/.ignored'   => "This is an ignored dotfile.\n",
           'source/.untracked' => "This is an untracked dotfile.\n",
@@ -79,11 +86,11 @@ for my $test (
     $git->config( 'user.name'  => 'dzp-git test' );
     $git->config( 'user.email' => 'dzp-git@test' );
 
-    # check in dotfiles
+    # check in tracked files
     # we cannot ship it in the dist, since PruneCruft plugin would trim it
     #   Don't use --force, because only -f works before git 1.5.6
-    $git->add( -f => qw(lib tracked .tracked .gitignore) );
-    $git->commit( { message=>'ignore file for git' } );
+    $git->add( -f => qw(lib share tracked .tracked .gitignore) );
+    $git->commit( { message=>'files known to git' } );
 
     $tzil->build;
 
