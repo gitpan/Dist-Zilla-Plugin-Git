@@ -48,7 +48,6 @@ sub pmver {
     return sprintf('%-45s => %-10s%-15s%s', $module, $pmver, $wanted, "\n");
 }
 
-eval { $v .= pmver('Class::MOP','any version') };
 eval { $v .= pmver('Cwd','any version') };
 eval { $v .= pmver('DateTime','any version') };
 eval { $v .= pmver('Dist::Zilla','4') };
@@ -81,6 +80,7 @@ eval { $v .= pmver('List::AllUtils','any version') };
 eval { $v .= pmver('List::Util','any version') };
 eval { $v .= pmver('Log::Dispatchouli','any version') };
 eval { $v .= pmver('Module::Build','0.3601') };
+eval { $v .= pmver('Module::Runtime','any version') };
 eval { $v .= pmver('Moose','any version') };
 eval { $v .= pmver('Moose::Autobox','any version') };
 eval { $v .= pmver('Moose::Role','any version') };

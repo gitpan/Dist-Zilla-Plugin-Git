@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Init;
 {
-  $Dist::Zilla::Plugin::Git::Init::VERSION = '2.016';
+  $Dist::Zilla::Plugin::Git::Init::VERSION = '2.017';
 }
 # ABSTRACT: initialize git repository on dzil new
 
@@ -96,7 +96,7 @@ Dist::Zilla::Plugin::Git::Init - initialize git repository on dzil new
 
 =head1 VERSION
 
-version 2.016
+version 2.017
 
 =head1 SYNOPSIS
 

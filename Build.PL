@@ -19,7 +19,7 @@ my %module_build_args = (
     'Jerome Quelin'
   ],
   'dist_name' => 'Dist-Zilla-Plugin-Git',
-  'dist_version' => '2.016',
+  'dist_version' => '2.017',
   'license' => 'perl',
   'module_name' => 'Dist::Zilla::Plugin::Git',
   'recursive_test_files' => 1,
@@ -32,7 +32,6 @@ my %module_build_args = (
     'warnings' => '0'
   },
   'requires' => {
-    'Class::MOP' => '0',
     'Cwd' => '0',
     'DateTime' => '0',
     'Dist::Zilla' => '4',
@@ -53,6 +52,7 @@ my %module_build_args = (
     'IPC::System::Simple' => '0',
     'List::AllUtils' => '0',
     'List::Util' => '0',
+    'Module::Runtime' => '0',
     'Moose' => '0',
     'Moose::Autobox' => '0',
     'Moose::Role' => '0',

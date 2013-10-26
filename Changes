@@ -1,5 +1,10 @@
 Revision history for Dist::Zilla::Plugin::Git
 
+2.017     2013-10-26 19:57:59 Europe/Paris
+ - remove use of deprecated Class::MOP function (karen etheridge)
+ - make Git::CommitBuild compatible with Dist::Zilla 5
+   (kent fredric, karen etheridge, & christopher madsen)
+
 2.016     2013-10-19 18:27:32 Europe/Paris
  - fix exclude_filename to not match partial paths (karen etheridge)
    If you really intended to match a partial path, use exclude_match instead.

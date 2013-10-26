@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::CommitBuild;
 {
-  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '2.016';
+  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '2.017';
 }
 # ABSTRACT: checkin build results on separate branch
 
@@ -114,7 +114,9 @@ sub _commit_build {
     my $target_branch = _format_branch( $branch, $self );
 
     for my $file ( @{ $self->zilla->files } ) {
-        my ( $name, $content ) = ( $file->name, $file->content );
+        my ( $name, $content ) = ( $file->name, (Dist::Zilla->VERSION < 5
+                                                 ? $file->content
+                                                 : $file->encoded_content) );
         my ( $outfile ) = $dir->file( $name );
         $outfile->parent->mkpath();
         my $fd = $outfile->openw;
@@ -195,7 +197,7 @@ Dist::Zilla::Plugin::Git::CommitBuild - checkin build results on separate branch
 
 =head1 VERSION
 
-version 2.016
+version 2.017
 
 =head1 SYNOPSIS
 
