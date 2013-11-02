@@ -50,14 +50,17 @@ sub pmver {
 
 eval { $v .= pmver('Cwd','any version') };
 eval { $v .= pmver('DateTime','any version') };
+eval { $v .= pmver('Devel::SimpleTrace','any version') };
 eval { $v .= pmver('Dist::Zilla','4') };
 eval { $v .= pmver('Dist::Zilla::File::InMemory','any version') };
+eval { $v .= pmver('Dist::Zilla::Plugin::Config::Git','any version') };
 eval { $v .= pmver('Dist::Zilla::Plugin::GatherDir','4.200016') };
 eval { $v .= pmver('Dist::Zilla::Role::AfterBuild','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::AfterMint','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::AfterRelease','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::BeforeRelease','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::FilePruner','any version') };
+eval { $v .= pmver('Dist::Zilla::Role::GitConfig','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::PluginBundle','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::Releaser','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::VersionProvider','any version') };

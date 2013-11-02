@@ -51,6 +51,7 @@
             "Dist::Zilla::Role::AfterRelease" : "0",
             "Dist::Zilla::Role::BeforeRelease" : "0",
             "Dist::Zilla::Role::FilePruner" : "0",
+            "Dist::Zilla::Role::GitConfig" : "0",
             "Dist::Zilla::Role::PluginBundle" : "0",
             "Dist::Zilla::Role::VersionProvider" : "0",
             "File::Spec" : "0",
@@ -86,7 +87,9 @@
       },
       "test" : {
          "requires" : {
+            "Devel::SimpleTrace" : "0",
             "Dist::Zilla::File::InMemory" : "0",
+            "Dist::Zilla::Plugin::Config::Git" : "0",
             "Dist::Zilla::Role::Releaser" : "0",
             "Dist::Zilla::Tester" : "0",
             "Exporter" : "0",
@@ -109,54 +112,54 @@
    "provides" : {
       "Dist::Zilla::Plugin::Git" : {
          "file" : "lib/Dist/Zilla/Plugin/Git.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       },
       "Dist::Zilla::Plugin::Git::Check" : {
          "file" : "lib/Dist/Zilla/Plugin/Git/Check.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       },
       "Dist::Zilla::Plugin::Git::Commit" : {
          "file" : "lib/Dist/Zilla/Plugin/Git/Commit.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       },
       "Dist::Zilla::Plugin::Git::CommitBuild" : {
          "file" : "lib/Dist/Zilla/Plugin/Git/CommitBuild.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       },
       "Dist::Zilla::Plugin::Git::GatherDir" : {
          "file" : "lib/Dist/Zilla/Plugin/Git/GatherDir.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       },
       "Dist::Zilla::Plugin::Git::Init" : {
          "file" : "lib/Dist/Zilla/Plugin/Git/Init.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       },
       "Dist::Zilla::Plugin::Git::NextVersion" : {
          "file" : "lib/Dist/Zilla/Plugin/Git/NextVersion.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       },
       "Dist::Zilla::Plugin::Git::Push" : {
          "file" : "lib/Dist/Zilla/Plugin/Git/Push.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       },
       "Dist::Zilla::Plugin::Git::Tag" : {
          "file" : "lib/Dist/Zilla/Plugin/Git/Tag.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       },
       "Dist::Zilla::PluginBundle::Git" : {
          "file" : "lib/Dist/Zilla/PluginBundle/Git.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       },
       "Dist::Zilla::Role::Git::DirtyFiles" : {
          "file" : "lib/Dist/Zilla/Role/Git/DirtyFiles.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       },
       "Dist::Zilla::Role::Git::Repo" : {
          "file" : "lib/Dist/Zilla/Role/Git/Repo.pm",
-         "version" : "2.017"
+         "version" : "2.018"
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
          "mailto" : "bug-dist-zilla-plugin-git at rt.cpan.org",
@@ -170,7 +173,7 @@
       },
       "x_MailingList" : "http://www.listbox.com/subscribe/?list_id=139292"
    },
-   "version" : "2.017",
+   "version" : "2.018",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018001"
@@ -465,7 +468,7 @@
       "zilla" : {
          "class" : "Dist::Zilla::Dist::Builder",
          "config" : {
-            "is_trial" : "0"
+            "is_trial" : "1"
          },
          "version" : "4.300039"
       }

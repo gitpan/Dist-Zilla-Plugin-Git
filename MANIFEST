@@ -24,6 +24,8 @@ corpus/commit/dist.ini
 corpus/dzp-git.pub
 corpus/dzp-git.sec
 corpus/gatherdir/lib/DZT/Sample.pm
+corpus/push-gitconfig/Changes
+corpus/push-gitconfig/dist.ini
 corpus/push-multi/Changes
 corpus/push-multi/dist.ini
 corpus/push/Changes
@@ -67,6 +69,7 @@ t/commit-ws.t
 t/commit.t
 t/gatherdir.t
 t/lib/Dist/Zilla/Plugin/MyTestArchiver.pm
+t/push-gitconfig.t
 t/push-multi.t
 t/push.t
 t/release-pod-coverage.t

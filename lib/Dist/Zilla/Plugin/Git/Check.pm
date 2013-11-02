@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Check;
 {
-  $Dist::Zilla::Plugin::Git::Check::VERSION = '2.017';
+  $Dist::Zilla::Plugin::Git::Check::VERSION = '2.018'; # TRIAL
 }
 # ABSTRACT: check your git repository before releasing
 
@@ -25,8 +25,13 @@ use constant _DieWarnIgnore => do { enum [qw[ die warn ignore ]] };
 with 'Dist::Zilla::Role::BeforeRelease';
 with 'Dist::Zilla::Role::Git::Repo';
 with 'Dist::Zilla::Role::Git::DirtyFiles';
+with 'Dist::Zilla::Role::GitConfig';
 
 has untracked_files => ( is=>'ro', isa => _DieWarnIgnore, default => 'die' );
+
+sub _git_config_mapping { +{
+   changelog => '%{changelog}s',
+} }
 
 # -- public methods
 
@@ -97,7 +102,7 @@ Dist::Zilla::Plugin::Git::Check - check your git repository before releasing
 
 =head1 VERSION
 
-version 2.017
+version 2.018
 
 =head1 SYNOPSIS
 

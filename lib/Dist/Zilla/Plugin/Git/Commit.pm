@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
 {
-  $Dist::Zilla::Plugin::Git::Commit::VERSION = '2.017';
+  $Dist::Zilla::Plugin::Git::Commit::VERSION = '2.018'; # TRIAL
 }
 # ABSTRACT: commit dirty files
 
@@ -43,6 +43,11 @@ use String::Formatter method_stringf => {
 with 'Dist::Zilla::Role::AfterRelease';
 with 'Dist::Zilla::Role::Git::Repo';
 with 'Dist::Zilla::Role::Git::DirtyFiles';
+with 'Dist::Zilla::Role::GitConfig';
+
+sub _git_config_mapping { +{
+   changelog => '%{changelog}s',
+} }
 
 # -- attributes
 
@@ -145,7 +150,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 2.017
+version 2.018
 
 =head1 SYNOPSIS
 

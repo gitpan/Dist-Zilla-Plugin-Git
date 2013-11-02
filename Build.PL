@@ -19,7 +19,7 @@ my %module_build_args = (
     'Jerome Quelin'
   ],
   'dist_name' => 'Dist-Zilla-Plugin-Git',
-  'dist_version' => '2.017',
+  'dist_version' => '2.018',
   'license' => 'perl',
   'module_name' => 'Dist::Zilla::Plugin::Git',
   'recursive_test_files' => 1,
@@ -41,6 +41,7 @@ my %module_build_args = (
     'Dist::Zilla::Role::AfterRelease' => '0',
     'Dist::Zilla::Role::BeforeRelease' => '0',
     'Dist::Zilla::Role::FilePruner' => '0',
+    'Dist::Zilla::Role::GitConfig' => '0',
     'Dist::Zilla::Role::PluginBundle' => '0',
     'Dist::Zilla::Role::VersionProvider' => '0',
     'File::Spec' => '0',
@@ -74,7 +75,9 @@ my %module_build_args = (
     'warnings' => '0'
   },
   'test_requires' => {
+    'Devel::SimpleTrace' => '0',
     'Dist::Zilla::File::InMemory' => '0',
+    'Dist::Zilla::Plugin::Config::Git' => '0',
     'Dist::Zilla::Role::Releaser' => '0',
     'Dist::Zilla::Tester' => '0',
     'Exporter' => '0',

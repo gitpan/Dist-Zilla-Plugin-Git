@@ -3,7 +3,9 @@ abstract: 'update your git repository after release'
 author:
   - 'Jerome Quelin'
 build_requires:
+  Devel::SimpleTrace: 0
   Dist::Zilla::File::InMemory: 0
+  Dist::Zilla::Plugin::Config::Git: 0
   Dist::Zilla::Role::Releaser: 0
   Dist::Zilla::Tester: 0
   Exporter: 0
@@ -39,40 +41,40 @@ no_index:
 provides:
   Dist::Zilla::Plugin::Git:
     file: lib/Dist/Zilla/Plugin/Git.pm
-    version: 2.017
+    version: 2.018
   Dist::Zilla::Plugin::Git::Check:
     file: lib/Dist/Zilla/Plugin/Git/Check.pm
-    version: 2.017
+    version: 2.018
   Dist::Zilla::Plugin::Git::Commit:
     file: lib/Dist/Zilla/Plugin/Git/Commit.pm
-    version: 2.017
+    version: 2.018
   Dist::Zilla::Plugin::Git::CommitBuild:
     file: lib/Dist/Zilla/Plugin/Git/CommitBuild.pm
-    version: 2.017
+    version: 2.018
   Dist::Zilla::Plugin::Git::GatherDir:
     file: lib/Dist/Zilla/Plugin/Git/GatherDir.pm
-    version: 2.017
+    version: 2.018
   Dist::Zilla::Plugin::Git::Init:
     file: lib/Dist/Zilla/Plugin/Git/Init.pm
-    version: 2.017
+    version: 2.018
   Dist::Zilla::Plugin::Git::NextVersion:
     file: lib/Dist/Zilla/Plugin/Git/NextVersion.pm
-    version: 2.017
+    version: 2.018
   Dist::Zilla::Plugin::Git::Push:
     file: lib/Dist/Zilla/Plugin/Git/Push.pm
-    version: 2.017
+    version: 2.018
   Dist::Zilla::Plugin::Git::Tag:
     file: lib/Dist/Zilla/Plugin/Git/Tag.pm
-    version: 2.017
+    version: 2.018
   Dist::Zilla::PluginBundle::Git:
     file: lib/Dist/Zilla/PluginBundle/Git.pm
-    version: 2.017
+    version: 2.018
   Dist::Zilla::Role::Git::DirtyFiles:
     file: lib/Dist/Zilla/Role/Git/DirtyFiles.pm
-    version: 2.017
+    version: 2.018
   Dist::Zilla::Role::Git::Repo:
     file: lib/Dist/Zilla/Role/Git/Repo.pm
-    version: 2.017
+    version: 2.018
 requires:
   Cwd: 0
   DateTime: 0
@@ -83,6 +85,7 @@ requires:
   Dist::Zilla::Role::AfterRelease: 0
   Dist::Zilla::Role::BeforeRelease: 0
   Dist::Zilla::Role::FilePruner: 0
+  Dist::Zilla::Role::GitConfig: 0
   Dist::Zilla::Role::PluginBundle: 0
   Dist::Zilla::Role::VersionProvider: 0
   File::Spec: 0
@@ -119,7 +122,7 @@ resources:
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-Git/
   repository: git://github.com/madsen/dist-zilla-plugin-git.git
   x_MailingList: http://www.listbox.com/subscribe/?list_id=139292
-version: 2.017
+version: 2.018
 x_Dist_Zilla:
   perl:
     version: 5.018001
@@ -351,7 +354,7 @@ x_Dist_Zilla:
   zilla:
     class: Dist::Zilla::Dist::Builder
     config:
-      is_trial: 0
+      is_trial: 1
     version: 4.300039
 x_author_pledge:
   version: 1

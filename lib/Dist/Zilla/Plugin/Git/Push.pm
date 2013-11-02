@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Push;
 {
-  $Dist::Zilla::Plugin::Git::Push::VERSION = '2.017';
+  $Dist::Zilla::Plugin::Git::Push::VERSION = '2.018'; # TRIAL
 }
 # ABSTRACT: push current branch
 
@@ -25,8 +25,13 @@ use namespace::autoclean;
 with 'Dist::Zilla::Role::BeforeRelease';
 with 'Dist::Zilla::Role::AfterRelease';
 with 'Dist::Zilla::Role::Git::Repo';
+with 'Dist::Zilla::Role::GitConfig';
 
 sub mvp_multivalue_args { qw(push_to) }
+
+sub _git_config_mapping { +{
+   push_to => '%{remote}s %{local_branch}s:%{remote_branch}s',
+} }
 
 # -- attributes
 
@@ -38,7 +43,6 @@ has push_to => (
   lazy => 1,
   default => sub { [ qw(origin) ] },
 );
-
 
 sub before_release {
     my $self = shift;
@@ -90,7 +94,7 @@ Dist::Zilla::Plugin::Git::Push - push current branch
 
 =head1 VERSION
 
-version 2.017
+version 2.018
 
 =head1 SYNOPSIS
 
