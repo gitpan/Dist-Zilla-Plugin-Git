@@ -65,6 +65,7 @@ eval { $v .= pmver('Dist::Zilla::Role::PluginBundle','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::Releaser','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::VersionProvider','any version') };
 eval { $v .= pmver('Dist::Zilla::Tester','any version') };
+eval { $v .= pmver('Encode','any version') };
 eval { $v .= pmver('Exporter','any version') };
 eval { $v .= pmver('File::Copy','any version') };
 eval { $v .= pmver('File::Copy::Recursive','any version') };
@@ -104,6 +105,7 @@ eval { $v .= pmver('constant','any version') };
 eval { $v .= pmver('lib','any version') };
 eval { $v .= pmver('namespace::autoclean','0.09') };
 eval { $v .= pmver('strict','any version') };
+eval { $v .= pmver('utf8','any version') };
 eval { $v .= pmver('version','0.80') };
 eval { $v .= pmver('warnings','any version') };
 

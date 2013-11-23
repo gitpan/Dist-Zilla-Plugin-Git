@@ -19,7 +19,7 @@ my %module_build_args = (
     'Jerome Quelin'
   ],
   'dist_name' => 'Dist-Zilla-Plugin-Git',
-  'dist_version' => '2.018',
+  'dist_version' => '2.019',
   'license' => 'perl',
   'module_name' => 'Dist::Zilla::Plugin::Git',
   'recursive_test_files' => 1,
@@ -80,6 +80,7 @@ my %module_build_args = (
     'Dist::Zilla::Plugin::Config::Git' => '0',
     'Dist::Zilla::Role::Releaser' => '0',
     'Dist::Zilla::Tester' => '0',
+    'Encode' => '0',
     'Exporter' => '0',
     'File::Copy' => '0',
     'File::Copy::Recursive' => '0',
@@ -93,7 +94,8 @@ my %module_build_args = (
     'Test::DZil' => '0',
     'Test::Fatal' => '0.006',
     'Test::More' => '0.88',
-    'lib' => '0'
+    'lib' => '0',
+    'utf8' => '0'
   },
   get_options => { 'force-install' => undef },
 );

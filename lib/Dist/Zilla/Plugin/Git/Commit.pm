@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
 {
-  $Dist::Zilla::Plugin::Git::Commit::VERSION = '2.018'; # TRIAL
+  $Dist::Zilla::Plugin::Git::Commit::VERSION = '2.019';
 }
 # ABSTRACT: commit dirty files
 
@@ -89,6 +89,7 @@ sub after_release {
 
     # write commit message in a temp file
     my ($fh, $filename) = tempfile( getcwd . '/DZP-git.XXXX', UNLINK => 1 );
+    binmode $fh, ':utf8' unless Dist::Zilla->VERSION < 5;
     print $fh $self->get_commit_message;
     close $fh;
 
@@ -150,7 +151,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 2.018
+version 2.019
 
 =head1 SYNOPSIS
 
