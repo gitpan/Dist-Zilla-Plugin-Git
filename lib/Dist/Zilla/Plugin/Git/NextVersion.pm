@@ -11,7 +11,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::NextVersion;
 {
-  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.019';
+  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.020';
 }
 # ABSTRACT: provide a version number by bumping the last git release tag
 
@@ -20,7 +20,7 @@ use version 0.80 ();
 
 use Moose;
 use namespace::autoclean 0.09;
-use Path::Class qw(file);
+use Path::Tiny qw();
 use Try::Tiny;
 use Moose::Util::TypeConstraints;
 
@@ -86,7 +86,7 @@ sub _last_version {
 
   if ($by_branch) {
     my $head;
-    my $cachefile = file(_cache_fn);
+    my $cachefile = Path::Tiny::path(_cache_fn);
     if (-f $cachefile) {
       ($head) = $git->rev_parse('HEAD');
       return $1 if $cachefile->slurp =~ /^\Q$head\E (.+)/;
@@ -177,13 +177,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Dist::Zilla::Plugin::Git::NextVersion - provide a version number by bumping the last git release tag
 
 =head1 VERSION
 
-version 2.019
+version 2.020
 
 =head1 SYNOPSIS
 

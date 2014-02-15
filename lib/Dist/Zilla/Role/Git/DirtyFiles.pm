@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Role::Git::DirtyFiles;
 {
-  $Dist::Zilla::Role::Git::DirtyFiles::VERSION = '2.019';
+  $Dist::Zilla::Role::Git::DirtyFiles::VERSION = '2.020';
 }
 # ABSTRACT: provide the allow_dirty & changelog attributes
 
@@ -23,7 +23,7 @@ use Moose::Util::TypeConstraints;
 
 use namespace::autoclean;
 use List::Util 'first';
-use Path::Class;
+use Path::Tiny 0.048 qw(); # subsumes
 use Try::Tiny;
 
 requires qw(log_fatal repo_root zilla);
@@ -73,21 +73,20 @@ sub list_dirty_files
 
   if ($git_root ne '.') {
     # Interpret allow_dirty relative to the dzil root
-    my $dzil_root = $self->zilla->root->absolute->resolve;
-    $git_root     = dir($git_root)
+    my $dzil_root = Path::Tiny::path($self->zilla->root)->absolute->realpath;
+    $git_root     = Path::Tiny::path($git_root)
                       ->absolute($dzil_root)
-                      ->resolve;
+                      ->realpath;
 
     $self->log_fatal("Dzil root $dzil_root is not inside Git root $git_root")
         unless $git_root->subsumes($dzil_root);
 
     for my $fn (@filenames) {
       try {
-        $fn = file($fn)
+        $fn = Path::Tiny::path($fn)
                 ->absolute($dzil_root)
-                ->resolve            # process ..
+                ->realpath            # process ..
                 ->relative($git_root)
-                ->as_foreign('Unix') # Git always uses Unix-style paths
                 ->stringify;
       };
     }
@@ -106,13 +105,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Dist::Zilla::Role::Git::DirtyFiles - provide the allow_dirty & changelog attributes
 
 =head1 VERSION
 
-version 2.019
+version 2.020
 
 =head1 DESCRIPTION
 
@@ -123,12 +124,21 @@ dirty in the local git checkout.
 
 =head2 allow_dirty
 
-A list of files that are allowed to be dirty in the git checkout.
+A list of paths that are allowed to be dirty in the git checkout.
 Defaults to C<dist.ini> and the changelog (as defined per the
 C<changelog> attribute.
 
-If your C<repo_root> is not the default (C<.>), then these filenames
+If your C<repo_root> is not the default (C<.>), then these pathnames
 are relative to Dist::Zilla's root directory, not the Git root directory.
+
+=head2 allow_dirty_match
+
+A list of regular expressions that match paths allowed to be dirty in
+the git checkout.  This is combined with C<allow_dirty>.  Defaults to
+the empty list.
+
+The paths being matched are relative to the Git root directory, even
+if your C<repo_root> is not the default (C<.>).
 
 =head2 changelog
 

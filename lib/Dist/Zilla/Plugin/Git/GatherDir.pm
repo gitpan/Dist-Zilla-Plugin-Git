@@ -8,12 +8,12 @@
 #
 package Dist::Zilla::Plugin::Git::GatherDir;
 {
-  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '2.019';
+  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '2.020';
 }
 # ABSTRACT: gather all tracked files in a Git working directory
 use Moose;
 use Moose::Autobox;
-use MooseX::Types::Path::Class qw(Dir File);
+use MooseX::Types::Path::Tiny qw(Path);
 with 'Dist::Zilla::Role::Git::Repo';
 use Dist::Zilla::Plugin::GatherDir 4.200016 (); # exclude_match
 extends 'Dist::Zilla::Plugin::GatherDir';
@@ -21,7 +21,7 @@ extends 'Dist::Zilla::Plugin::GatherDir';
 
 use File::Spec;
 use List::AllUtils qw(uniq);
-use Path::Class;
+use Path::Tiny;
 
 use namespace::autoclean;
 
@@ -39,7 +39,7 @@ override gather_files => sub {
 
   my $root = "" . $self->root;
   $root =~ s{^~([\\/])}{require File::HomeDir; File::HomeDir->my_home . $1}e;
-  $root = Path::Class::dir($root);
+  $root = Path::Tiny::path($root);
 
   my $git = Git::Wrapper->new("$root");
 
@@ -54,11 +54,11 @@ override gather_files => sub {
 
   my @files;
   FILE: for my $filename (uniq $git->ls_files(@opts)) {
-    my $file = file($filename)->relative($root);
+    my $file = Path::Tiny::path($filename)->relative($root);
 
     unless ($self->include_dotfiles) {
       next FILE if $file->basename =~ qr/^\./;
-      next FILE if grep { /^\.[^.]/ } $file->dir->dir_list;
+      next FILE if grep { /^\.[^.]/ } split q{/}, $file->parent->stringify;
     }
 
     next if $file =~ $exclude_regex;
@@ -75,7 +75,7 @@ override gather_files => sub {
   for my $file (@files) {
     (my $newname = $file->name) =~ s{\A\Q$root\E[\\/]}{}g;
     $newname = File::Spec->catdir($self->prefix, $newname) if $self->prefix;
-    $newname = Path::Class::dir($newname)->as_foreign('Unix')->stringify;
+    $newname = Path::Tiny::path($newname)->stringify;
 
     $file->name($newname);
     $self->add_file($file);
@@ -93,13 +93,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Dist::Zilla::Plugin::Git::GatherDir - gather all tracked files in a Git working directory
 
 =head1 VERSION
 
-version 2.019
+version 2.020
 
 =head1 DESCRIPTION
 
