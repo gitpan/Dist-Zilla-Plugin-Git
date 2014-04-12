@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Tag;
 {
-  $Dist::Zilla::Plugin::Git::Tag::VERSION = '2.020';
+  $Dist::Zilla::Plugin::Git::Tag::VERSION = '2.021';
 }
 # ABSTRACT: tag the new version
 
@@ -58,6 +58,20 @@ sub _build_tag
 
 # -- role implementation
 
+around dump_config => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    my $config = $self->$orig;
+
+    $config->{+__PACKAGE__} = {
+        map { $_ => $self->$_ } qw(tag_format tag_message time_zone branch signed tag),
+    };
+
+    return $config;
+};
+
 sub before_release {
     my $self = shift;
 
@@ -98,7 +112,7 @@ Dist::Zilla::Plugin::Git::Tag - tag the new version
 
 =head1 VERSION
 
-version 2.020
+version 2.021
 
 =head1 SYNOPSIS
 

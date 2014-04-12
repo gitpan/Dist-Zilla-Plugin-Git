@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Role::Git::DirtyFiles;
 {
-  $Dist::Zilla::Role::Git::DirtyFiles::VERSION = '2.020';
+  $Dist::Zilla::Role::Git::DirtyFiles::VERSION = '2.021';
 }
 # ABSTRACT: provide the allow_dirty & changelog attributes
 
@@ -61,7 +61,19 @@ around mvp_multivalue_args => sub {
 
 sub _build_allow_dirty { [ 'dist.ini', shift->changelog ] }
 
+around dump_config => sub
+{
+    my $orig = shift;
+    my $self = shift;
 
+    my $config = $self->$orig;
+
+    $config->{+__PACKAGE__} = {
+        map { $_ => $self->$_ } qw(allow_dirty allow_dirty_match changelog),
+    };
+
+    return $config;
+};
 
 
 sub list_dirty_files
@@ -113,7 +125,7 @@ Dist::Zilla::Role::Git::DirtyFiles - provide the allow_dirty & changelog attribu
 
 =head1 VERSION
 
-version 2.020
+version 2.021
 
 =head1 DESCRIPTION
 

@@ -8,7 +8,7 @@
 #
 package Dist::Zilla::Role::Git::Repo;
 {
-  $Dist::Zilla::Role::Git::Repo::VERSION = '2.020';
+  $Dist::Zilla::Role::Git::Repo::VERSION = '2.021';
 }
 
 # ABSTRACT: Provide repository information for Git plugins
@@ -19,6 +19,20 @@ has 'repo_root'   => ( is => 'ro', isa => 'Str', default => '.' );
 
 
 my %cached_wrapper;
+
+around dump_config => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    my $config = $self->$orig;
+
+    $config->{+__PACKAGE__} = {
+        repo_root => $self->repo_root,
+    };
+
+    return $config;
+};
 
 sub git {
   my $root = shift->repo_root;
@@ -43,7 +57,7 @@ Dist::Zilla::Role::Git::Repo - Provide repository information for Git plugins
 
 =head1 VERSION
 
-version 2.020
+version 2.021
 
 =head1 DESCRIPTION
 

@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::CommitBuild;
 {
-  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '2.020';
+  $Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '2.021';
 }
 # ABSTRACT: checkin build results on separate branch
 
@@ -86,6 +86,21 @@ has multiple_inheritance => (
 sub _build_release_message { return shift->message; }
 
 # -- role implementation
+
+around dump_config => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    my $config = $self->$orig;
+
+    $config->{+__PACKAGE__} = {
+        map { $_ => $self->$_ }
+            qw(branch release_branch message release_message build_root multiple_inheritance),
+    };
+
+    return $config;
+};
 
 sub after_build {
     my ( $self, $args) = @_;
@@ -196,7 +211,7 @@ Dist::Zilla::Plugin::Git::CommitBuild - checkin build results on separate branch
 
 =head1 VERSION
 
-version 2.020
+version 2.021
 
 =head1 SYNOPSIS
 

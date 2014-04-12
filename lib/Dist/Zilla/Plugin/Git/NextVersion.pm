@@ -11,7 +11,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::NextVersion;
 {
-  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.020';
+  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.021';
 }
 # ABSTRACT: provide a version number by bumping the last git release tag
 
@@ -123,6 +123,20 @@ sub _last_version {
 
 # -- role implementation
 
+around dump_config => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    my $config = $self->$orig;
+
+    $config->{+__PACKAGE__} = {
+        map { $_ => $self->$_ } qw(version_regexp first_version version_by_branch),
+    };
+
+    return $config;
+};
+
 sub before_release {
   my $self = shift;
 
@@ -185,7 +199,7 @@ Dist::Zilla::Plugin::Git::NextVersion - provide a version number by bumping the 
 
 =head1 VERSION
 
-version 2.020
+version 2.021
 
 =head1 SYNOPSIS
 

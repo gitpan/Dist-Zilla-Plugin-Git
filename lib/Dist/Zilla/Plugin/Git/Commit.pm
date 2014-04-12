@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
 {
-  $Dist::Zilla::Plugin::Git::Commit::VERSION = '2.020';
+  $Dist::Zilla::Plugin::Git::Commit::VERSION = '2.021';
 }
 # ABSTRACT: commit dirty files
 
@@ -58,6 +58,20 @@ has add_files_in  => ( ro, isa=>'ArrayRef[Str]', default => sub { [] } );
 # -- public methods
 
 sub mvp_multivalue_args { qw( add_files_in ) }
+
+around dump_config => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    my $config = $self->$orig;
+
+    $config->{+__PACKAGE__} = {
+        map { $_ => $self->$_ } qw(commit_msg time_zone add_files_in),
+    };
+
+    return $config;
+};
 
 sub after_release {
     my $self = shift;
@@ -153,7 +167,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 2.020
+version 2.021
 
 =head1 SYNOPSIS
 

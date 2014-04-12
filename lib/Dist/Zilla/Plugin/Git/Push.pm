@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Push;
 {
-  $Dist::Zilla::Plugin::Git::Push::VERSION = '2.020';
+  $Dist::Zilla::Plugin::Git::Push::VERSION = '2.021';
 }
 # ABSTRACT: push current branch
 
@@ -43,6 +43,20 @@ has push_to => (
   lazy => 1,
   default => sub { [ qw(origin) ] },
 );
+
+around dump_config => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    my $config = $self->$orig;
+
+    $config->{+__PACKAGE__} = {
+        map { $_ => $self->$_ } qw(push_to remotes_must_exist),
+    };
+
+    return $config;
+};
 
 sub before_release {
     my $self = shift;
@@ -96,7 +110,7 @@ Dist::Zilla::Plugin::Git::Push - push current branch
 
 =head1 VERSION
 
-version 2.020
+version 2.021
 
 =head1 SYNOPSIS
 

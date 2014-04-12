@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Check;
 {
-  $Dist::Zilla::Plugin::Git::Check::VERSION = '2.020';
+  $Dist::Zilla::Plugin::Git::Check::VERSION = '2.021';
 }
 # ABSTRACT: check your git repository before releasing
 
@@ -34,6 +34,20 @@ sub _git_config_mapping { +{
 } }
 
 # -- public methods
+
+around dump_config => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    my $config = $self->$orig;
+
+    $config->{+__PACKAGE__} = {
+        untracked_files => $self->untracked_files,
+    };
+
+    return $config;
+};
 
 sub before_release {
     my $self = shift;
@@ -104,7 +118,7 @@ Dist::Zilla::Plugin::Git::Check - check your git repository before releasing
 
 =head1 VERSION
 
-version 2.020
+version 2.021
 
 =head1 SYNOPSIS
 

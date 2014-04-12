@@ -8,15 +8,14 @@
 #
 package Dist::Zilla::Plugin::Git::GatherDir;
 {
-  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '2.020';
+  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '2.021';
 }
 # ABSTRACT: gather all tracked files in a Git working directory
 use Moose;
 use Moose::Autobox;
 use MooseX::Types::Path::Tiny qw(Path);
+extends 'Dist::Zilla::Plugin::GatherDir' => { -version => 4.200016 }; # exclude_match
 with 'Dist::Zilla::Role::Git::Repo';
-use Dist::Zilla::Plugin::GatherDir 4.200016 (); # exclude_match
-extends 'Dist::Zilla::Plugin::GatherDir';
 
 
 use File::Spec;
@@ -31,6 +30,20 @@ has include_untracked => (
   isa => 'Bool',
   default => 0,
 );
+
+around dump_config => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    my $config = $self->$orig;
+
+    $config->{+__PACKAGE__} = {
+        include_untracked => $self->include_untracked,
+    };
+
+    return $config;
+};
 
 override gather_files => sub {
   my ($self) = @_;
@@ -101,7 +114,7 @@ Dist::Zilla::Plugin::Git::GatherDir - gather all tracked files in a Git working 
 
 =head1 VERSION
 
-version 2.020
+version 2.021
 
 =head1 DESCRIPTION
 
