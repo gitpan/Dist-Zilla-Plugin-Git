@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Commit;
 {
-  $Dist::Zilla::Plugin::Git::Commit::VERSION = '2.021';
+  $Dist::Zilla::Plugin::Git::Commit::VERSION = '2.022';
 }
 # ABSTRACT: commit dirty files
 
@@ -22,6 +22,7 @@ use List::Util           qw{ first };
 use Moose;
 use MooseX::Has::Sugar;
 use MooseX::Types::Moose qw{ Str };
+use MooseX::Types::Path::Tiny 0.010 qw{ Paths };
 use Path::Tiny 0.048 qw(); # subsumes
 use Cwd;
 
@@ -53,7 +54,8 @@ sub _git_config_mapping { +{
 
 has commit_msg => ( ro, isa=>Str, default => 'v%v%n%n%c' );
 has time_zone  => ( ro, isa=>Str, default => 'local' );
-has add_files_in  => ( ro, isa=>'ArrayRef[Str]', default => sub { [] } );
+has add_files_in  => ( ro, isa=> Paths, coerce => 1, default => sub { [] });
+
 
 # -- public methods
 
@@ -167,7 +169,7 @@ Dist::Zilla::Plugin::Git::Commit - commit dirty files
 
 =head1 VERSION
 
-version 2.021
+version 2.022
 
 =head1 SYNOPSIS
 

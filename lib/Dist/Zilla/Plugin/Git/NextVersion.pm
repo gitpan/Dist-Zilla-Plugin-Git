@@ -11,7 +11,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::NextVersion;
 {
-  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.021';
+  $Dist::Zilla::Plugin::Git::NextVersion::VERSION = '2.022';
 }
 # ABSTRACT: provide a version number by bumping the last git release tag
 
@@ -175,10 +175,15 @@ sub provide_version {
 sub prune_files {
   my $self = shift;
 
-  my $files = $self->zilla->files;
+  for my $file (@{ $self->zilla->files }) {
 
-  # Ensure we don't distribute .gitnxtver_cache:
-  @$files = grep { $_->name ne _cache_fn } @$files;
+    # Ensure we don't distribute .gitnxtver_cache:
+    next unless $file->name eq _cache_fn;
+
+    $self->log_debug([ 'pruning %s', $file->name ]);
+
+    $self->zilla->prune_file($file);
+  }
 
   return;
 } # end prune_files
@@ -199,7 +204,7 @@ Dist::Zilla::Plugin::Git::NextVersion - provide a version number by bumping the 
 
 =head1 VERSION
 
-version 2.021
+version 2.022
 
 =head1 SYNOPSIS
 

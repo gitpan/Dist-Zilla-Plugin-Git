@@ -19,7 +19,7 @@ my %module_build_args = (
     'Jerome Quelin'
   ],
   'dist_name' => 'Dist-Zilla-Plugin-Git',
-  'dist_version' => '2.021',
+  'dist_version' => '2.022',
   'license' => 'perl',
   'module_name' => 'Dist::Zilla::Plugin::Git',
   'recursive_test_files' => 1,
@@ -61,7 +61,7 @@ my %module_build_args = (
     'MooseX::AttributeShortcuts' => '0',
     'MooseX::Has::Sugar' => '0',
     'MooseX::Types::Moose' => '0',
-    'MooseX::Types::Path::Tiny' => '0',
+    'MooseX::Types::Path::Tiny' => '0.010',
     'Path::Tiny' => '0.048',
     'String::Formatter' => '0',
     'Try::Tiny' => '0',
