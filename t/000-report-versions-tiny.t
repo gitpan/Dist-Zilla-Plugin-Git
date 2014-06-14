@@ -48,6 +48,8 @@ sub pmver {
     return sprintf('%-45s => %-10s%-15s%s', $module, $pmver, $wanted, "\n");
 }
 
+eval { $v .= pmver('CPAN::Meta::Check','0.007') };
+eval { $v .= pmver('CPAN::Meta::Requirements','any version') };
 eval { $v .= pmver('Cwd','any version') };
 eval { $v .= pmver('DateTime','any version') };
 eval { $v .= pmver('Devel::SimpleTrace','any version') };

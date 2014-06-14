@@ -83,3 +83,4 @@ t/version-by-branch.t
 t/version-default.t
 t/version-extraction.t
 t/version-regexp.t
+t/zzz-check-breaks.t

@@ -19,7 +19,7 @@ my %module_build_args = (
     'Jerome Quelin'
   ],
   'dist_name' => 'Dist-Zilla-Plugin-Git',
-  'dist_version' => '2.022',
+  'dist_version' => '2.023',
   'license' => 'perl',
   'module_name' => 'Dist::Zilla::Plugin::Git',
   'recursive_test_files' => 1,
@@ -74,6 +74,8 @@ my %module_build_args = (
     'warnings' => '0'
   },
   'test_requires' => {
+    'CPAN::Meta::Check' => '0.007',
+    'CPAN::Meta::Requirements' => '0',
     'Devel::SimpleTrace' => '0',
     'Dist::Zilla::File::InMemory' => '0',
     'Dist::Zilla::Plugin::Config::Git' => '0',

@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Tag;
 {
-  $Dist::Zilla::Plugin::Git::Tag::VERSION = '2.022';
+  $Dist::Zilla::Plugin::Git::Tag::VERSION = '2.023';
 }
 # ABSTRACT: tag the new version
 
@@ -112,7 +112,7 @@ Dist::Zilla::Plugin::Git::Tag - tag the new version
 
 =head1 VERSION
 
-version 2.022
+version 2.023
 
 =head1 SYNOPSIS
 

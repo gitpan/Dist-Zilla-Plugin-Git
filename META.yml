@@ -3,6 +3,8 @@ abstract: 'update your git repository after release'
 author:
   - 'Jerome Quelin'
 build_requires:
+  CPAN::Meta::Check: 0.007
+  CPAN::Meta::Requirements: 0
   Devel::SimpleTrace: 0
   Dist::Zilla::File::InMemory: 0
   Dist::Zilla::Plugin::Config::Git: 0
@@ -43,40 +45,40 @@ no_index:
 provides:
   Dist::Zilla::Plugin::Git:
     file: lib/Dist/Zilla/Plugin/Git.pm
-    version: 2.022
+    version: 2.023
   Dist::Zilla::Plugin::Git::Check:
     file: lib/Dist/Zilla/Plugin/Git/Check.pm
-    version: 2.022
+    version: 2.023
   Dist::Zilla::Plugin::Git::Commit:
     file: lib/Dist/Zilla/Plugin/Git/Commit.pm
-    version: 2.022
+    version: 2.023
   Dist::Zilla::Plugin::Git::CommitBuild:
     file: lib/Dist/Zilla/Plugin/Git/CommitBuild.pm
-    version: 2.022
+    version: 2.023
   Dist::Zilla::Plugin::Git::GatherDir:
     file: lib/Dist/Zilla/Plugin/Git/GatherDir.pm
-    version: 2.022
+    version: 2.023
   Dist::Zilla::Plugin::Git::Init:
     file: lib/Dist/Zilla/Plugin/Git/Init.pm
-    version: 2.022
+    version: 2.023
   Dist::Zilla::Plugin::Git::NextVersion:
     file: lib/Dist/Zilla/Plugin/Git/NextVersion.pm
-    version: 2.022
+    version: 2.023
   Dist::Zilla::Plugin::Git::Push:
     file: lib/Dist/Zilla/Plugin/Git/Push.pm
-    version: 2.022
+    version: 2.023
   Dist::Zilla::Plugin::Git::Tag:
     file: lib/Dist/Zilla/Plugin/Git/Tag.pm
-    version: 2.022
+    version: 2.023
   Dist::Zilla::PluginBundle::Git:
     file: lib/Dist/Zilla/PluginBundle/Git.pm
-    version: 2.022
+    version: 2.023
   Dist::Zilla::Role::Git::DirtyFiles:
     file: lib/Dist/Zilla/Role/Git/DirtyFiles.pm
-    version: 2.022
+    version: 2.023
   Dist::Zilla::Role::Git::Repo:
     file: lib/Dist/Zilla/Role/Git/Repo.pm
-    version: 2.022
+    version: 2.023
 requires:
   Cwd: 0
   DateTime: 0
@@ -123,10 +125,10 @@ resources:
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-Git/
   repository: git://github.com/madsen/dist-zilla-plugin-git.git
   x_MailingList: http://www.listbox.com/subscribe/?list_id=139292
-version: 2.022
+version: 2.023
 x_Dist_Zilla:
   perl:
-    version: 5.018001
+    version: 5.018002
   plugins:
     -
       class: Dist::Zilla::Plugin::MetaResources
@@ -136,6 +138,14 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::MetaNoIndex
       name: MetaNoIndex
       version: 5.009
+    -
+      class: Dist::Zilla::Plugin::Breaks
+      name: Breaks
+      version: 0.002
+    -
+      class: Dist::Zilla::Plugin::Test::CheckBreaks
+      name: Test::CheckBreaks
+      version: 0.007
     -
       class: Dist::Zilla::Plugin::Bootstrap::lib
       config:
@@ -408,7 +418,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v2.022
+          tag: v2.023
           tag_format: v%v
           tag_message: v%v
           time_zone: local
@@ -482,3 +492,5 @@ x_Dist_Zilla:
     version: 5.009
 x_author_pledge:
   version: 1
+x_breaks:
+  Dist::Zilla::App::CommandHelper::ChainSmoking: '<= 1.04'
