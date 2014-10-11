@@ -1,5 +1,9 @@
 Revision history for Dist::Zilla::Plugin::Git
 
+2.025     2014-10-11 19:05:56 Europe/Paris
+ - add build_warnings option to Git::Check
+   (christopher madsen, suggested by karen etheridge - rt#91057)
+
 2.024     2014-09-13 21:21:42 Europe/Paris
  - add branch option to Git::Init (tuomas jormola - github#21)
  - Git::Init now logs when it makes the initial commit

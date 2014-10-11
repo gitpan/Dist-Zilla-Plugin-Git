@@ -8,7 +8,7 @@
 #
 package Dist::Zilla::Plugin::Git::GatherDir;
 {
-  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '2.024';
+  $Dist::Zilla::Plugin::Git::GatherDir::VERSION = '2.025';
 }
 # ABSTRACT: gather all tracked files in a Git working directory
 use Moose;
@@ -114,7 +114,7 @@ Dist::Zilla::Plugin::Git::GatherDir - gather all tracked files in a Git working 
 
 =head1 VERSION
 
-version 2.024
+version 2.025
 
 =head1 DESCRIPTION
 
