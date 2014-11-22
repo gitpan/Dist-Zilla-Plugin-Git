@@ -11,10 +11,8 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Check;
-{
-  $Dist::Zilla::Plugin::Git::Check::VERSION = '2.025';
-}
 # ABSTRACT: check your git repository before releasing
+$Dist::Zilla::Plugin::Git::Check::VERSION = '2.026';
 
 use Moose;
 use namespace::autoclean 0.09;
@@ -139,7 +137,7 @@ Dist::Zilla::Plugin::Git::Check - check your git repository before releasing
 
 =head1 VERSION
 
-version 2.025
+version 2.026
 
 =head1 SYNOPSIS
 

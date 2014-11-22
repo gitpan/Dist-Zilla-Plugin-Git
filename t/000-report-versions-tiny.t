@@ -91,7 +91,6 @@ eval { $v .= pmver('Moose','any version') };
 eval { $v .= pmver('Moose::Autobox','any version') };
 eval { $v .= pmver('Moose::Role','any version') };
 eval { $v .= pmver('Moose::Util::TypeConstraints','any version') };
-eval { $v .= pmver('MooseX::AttributeShortcuts','any version') };
 eval { $v .= pmver('MooseX::Has::Sugar','any version') };
 eval { $v .= pmver('MooseX::Types::Moose','any version') };
 eval { $v .= pmver('MooseX::Types::Path::Tiny','0.010') };

@@ -32,7 +32,7 @@ configure_requires:
   version: 0.80
   warnings: 0
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.009, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 5.024, CPAN::Meta::Converter version 2.142690'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -45,40 +45,40 @@ no_index:
 provides:
   Dist::Zilla::Plugin::Git:
     file: lib/Dist/Zilla/Plugin/Git.pm
-    version: 2.025
+    version: 2.026
   Dist::Zilla::Plugin::Git::Check:
     file: lib/Dist/Zilla/Plugin/Git/Check.pm
-    version: 2.025
+    version: 2.026
   Dist::Zilla::Plugin::Git::Commit:
     file: lib/Dist/Zilla/Plugin/Git/Commit.pm
-    version: 2.025
+    version: 2.026
   Dist::Zilla::Plugin::Git::CommitBuild:
     file: lib/Dist/Zilla/Plugin/Git/CommitBuild.pm
-    version: 2.025
+    version: 2.026
   Dist::Zilla::Plugin::Git::GatherDir:
     file: lib/Dist/Zilla/Plugin/Git/GatherDir.pm
-    version: 2.025
+    version: 2.026
   Dist::Zilla::Plugin::Git::Init:
     file: lib/Dist/Zilla/Plugin/Git/Init.pm
-    version: 2.025
+    version: 2.026
   Dist::Zilla::Plugin::Git::NextVersion:
     file: lib/Dist/Zilla/Plugin/Git/NextVersion.pm
-    version: 2.025
+    version: 2.026
   Dist::Zilla::Plugin::Git::Push:
     file: lib/Dist/Zilla/Plugin/Git/Push.pm
-    version: 2.025
+    version: 2.026
   Dist::Zilla::Plugin::Git::Tag:
     file: lib/Dist/Zilla/Plugin/Git/Tag.pm
-    version: 2.025
+    version: 2.026
   Dist::Zilla::PluginBundle::Git:
     file: lib/Dist/Zilla/PluginBundle/Git.pm
-    version: 2.025
+    version: 2.026
   Dist::Zilla::Role::Git::DirtyFiles:
     file: lib/Dist/Zilla/Role/Git/DirtyFiles.pm
-    version: 2.025
+    version: 2.026
   Dist::Zilla::Role::Git::Repo:
     file: lib/Dist/Zilla/Role/Git/Repo.pm
-    version: 2.025
+    version: 2.026
 requires:
   Cwd: 0
   DateTime: 0
@@ -106,7 +106,6 @@ requires:
   Moose::Autobox: 0
   Moose::Role: 0
   Moose::Util::TypeConstraints: 0
-  MooseX::AttributeShortcuts: 0
   MooseX::Has::Sugar: 0
   MooseX::Types::Moose: 0
   MooseX::Types::Path::Tiny: 0.010
@@ -121,11 +120,11 @@ requires:
   version: 0.80
   warnings: 0
 resources:
+  MailingList: http://www.listbox.com/subscribe/?list_id=139292
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Git
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-Git/
   repository: git://github.com/madsen/dist-zilla-plugin-git.git
-  x_MailingList: http://www.listbox.com/subscribe/?list_id=139292
-version: 2.025
+version: 2.026
 x_Dist_Zilla:
   perl:
     version: 5.018002
@@ -133,11 +132,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaResources
       name: MetaResources
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::MetaNoIndex
       name: MetaNoIndex
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::Breaks
       name: Breaks
@@ -155,7 +154,7 @@ x_Dist_Zilla:
           try_built: ~
           try_built_method: mtime
       name: Bootstrap::lib
-      version: 0.04000001
+      version: 1.001000
     -
       class: Dist::Zilla::Plugin::Git::NextVersion
       config:
@@ -169,8 +168,17 @@ x_Dist_Zilla:
       version: ~
     -
       class: Dist::Zilla::Plugin::GatherDir
+      config:
+        Dist::Zilla::Plugin::GatherDir:
+          exclude_filename: []
+          exclude_match: []
+          follow_symlinks: 0
+          include_dotfiles: 0
+          prefix: ''
+          prune_directory: []
+          root: '.'
       name: JQ/GatherDir
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::Test::Compile
       config:
@@ -185,11 +193,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::PodCoverageTests
       name: JQ/PodCoverageTests
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::PodSyntaxTests
       name: JQ/PodSyntaxTests
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::ReportVersions::Tiny
       name: JQ/ReportVersions::Tiny
@@ -197,31 +205,31 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::PruneCruft
       name: JQ/PruneCruft
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::PruneFiles
       name: JQ/PruneFiles
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::ManifestSkip
       name: JQ/ManifestSkip
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::AutoPrereqs
       name: JQ/AutoPrereqs
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::ExtraTests
       name: JQ/ExtraTests
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::NextRelease
       name: JQ/NextRelease
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::PkgVersion
       name: JQ/PkgVersion
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::PodWeaver
       config:
@@ -303,11 +311,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ExecDir
       name: JQ/ExecDir
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::ShareDir
       name: JQ/ShareDir
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::Bugtracker
       name: JQ/Bugtracker
@@ -323,7 +331,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: JQ/MetaProvides::Package/AUTOVIV/:InstallModulesPM
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::MetaProvides::Package
       config:
@@ -337,7 +345,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaConfig
       name: JQ/MetaConfig
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::HelpWanted
       name: JQ/HelpWanted
@@ -345,7 +353,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::License
       name: JQ/License
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::Covenant
       name: JQ/Covenant
@@ -353,15 +361,15 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaYAML
       name: JQ/MetaYAML
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::MetaJSON
       name: JQ/MetaJSON
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::Readme
       name: JQ/Readme
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       name: JQ/ReadmeAnyFromPod
@@ -369,7 +377,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Manifest
       name: JQ/Manifest
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::CheckChangeLog
       name: JQ/CheckChangeLog
@@ -377,7 +385,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::TestRelease
       name: JQ/TestRelease
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::Git::Check
       config:
@@ -418,7 +426,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v2.025
+          tag: v2.026
           tag_format: v%v
           tag_message: v%v
           time_zone: local
@@ -440,56 +448,56 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::UploadToCPAN
       name: JQ/UploadToCPAN
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::ModuleBuild::Custom
       name: ModuleBuild::Custom
-      version: 4.24
+      version: 4.25
     -
       class: Dist::Zilla::Plugin::FileFinder::ByName
       name: ':BuildPL'
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::ConfirmRelease
       name: ConfirmRelease
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':IncModules'
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':TestFiles'
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ExecFiles'
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ShareFiles'
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':MainModule'
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':AllFiles'
-      version: 5.009
+      version: 5.024
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':NoFiles'
-      version: 5.009
+      version: 5.024
   zilla:
     class: Dist::Zilla::Dist::Builder
     config:
       is_trial: 0
-    version: 5.009
+    version: 5.024
 x_author_pledge:
   version: 1
 x_breaks:

@@ -7,11 +7,8 @@
 # the same terms as the Perl 5 programming language system itself.
 #
 package Dist::Zilla::Role::Git::Repo;
-{
-  $Dist::Zilla::Role::Git::Repo::VERSION = '2.025';
-}
-
 # ABSTRACT: Provide repository information for Git plugins
+$Dist::Zilla::Role::Git::Repo::VERSION = '2.026';
 
 use Moose::Role;
 
@@ -57,7 +54,7 @@ Dist::Zilla::Role::Git::Repo - Provide repository information for Git plugins
 
 =head1 VERSION
 
-version 2.025
+version 2.026
 
 =head1 DESCRIPTION
 

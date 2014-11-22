@@ -11,10 +11,8 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::Git::Push;
-{
-  $Dist::Zilla::Plugin::Git::Push::VERSION = '2.025';
-}
 # ABSTRACT: push current branch
+$Dist::Zilla::Plugin::Git::Push::VERSION = '2.026';
 
 use Moose;
 use MooseX::Has::Sugar;
@@ -110,7 +108,7 @@ Dist::Zilla::Plugin::Git::Push - push current branch
 
 =head1 VERSION
 
-version 2.025
+version 2.026
 
 =head1 SYNOPSIS
 
