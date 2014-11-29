@@ -3,7 +3,7 @@ use warnings;
 
 # this test was generated with Dist::Zilla::Plugin::Test::Compile 2.037
 
-use Test::More  tests => 12 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
+use Test::More  tests => 13 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
 
 
 
@@ -19,7 +19,8 @@ my @module_files = (
     'Dist/Zilla/Plugin/Git/Tag.pm',
     'Dist/Zilla/PluginBundle/Git.pm',
     'Dist/Zilla/Role/Git/DirtyFiles.pm',
-    'Dist/Zilla/Role/Git/Repo.pm'
+    'Dist/Zilla/Role/Git/Repo.pm',
+    'Dist/Zilla/Role/Git/StringFormatter.pm'
 );
 
 

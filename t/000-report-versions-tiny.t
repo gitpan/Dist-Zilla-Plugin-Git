@@ -83,6 +83,7 @@ eval { $v .= pmver('IO::Handle','any version') };
 eval { $v .= pmver('IPC::Open3','any version') };
 eval { $v .= pmver('IPC::System::Simple','any version') };
 eval { $v .= pmver('List::AllUtils','any version') };
+eval { $v .= pmver('List::MoreUtils','any version') };
 eval { $v .= pmver('List::Util','any version') };
 eval { $v .= pmver('Log::Dispatchouli','any version') };
 eval { $v .= pmver('Module::Build','0.3601') };

@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Role::Git::DirtyFiles;
 # ABSTRACT: provide the allow_dirty & changelog attributes
-$Dist::Zilla::Role::Git::DirtyFiles::VERSION = '2.026';
+$Dist::Zilla::Role::Git::DirtyFiles::VERSION = '2.027';
 
 use Moose::Role;
 use Moose::Autobox;
@@ -138,7 +138,7 @@ Dist::Zilla::Role::Git::DirtyFiles - provide the allow_dirty & changelog attribu
 
 =head1 VERSION
 
-version 2.026
+version 2.027
 
 =head1 DESCRIPTION
 
