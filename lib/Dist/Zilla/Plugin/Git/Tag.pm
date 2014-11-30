@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::Tag;
 # ABSTRACT: tag the new version
-$Dist::Zilla::Plugin::Git::Tag::VERSION = '2.027';
+$Dist::Zilla::Plugin::Git::Tag::VERSION = '2.028';
 
 use Moose;
 use MooseX::Has::Sugar;
@@ -102,7 +102,7 @@ Dist::Zilla::Plugin::Git::Tag - tag the new version
 
 =head1 VERSION
 
-version 2.027
+version 2.028
 
 =head1 SYNOPSIS
 

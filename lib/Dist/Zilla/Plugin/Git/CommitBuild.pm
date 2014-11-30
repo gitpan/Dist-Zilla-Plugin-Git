@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::Git::CommitBuild;
 # ABSTRACT: checkin build results on separate branch
-$Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '2.027';
+$Dist::Zilla::Plugin::Git::CommitBuild::VERSION = '2.028';
 
 use Git::Wrapper 0.021 ();      # need -STDIN
 use IPC::Open3;
@@ -208,7 +208,7 @@ Dist::Zilla::Plugin::Git::CommitBuild - checkin build results on separate branch
 
 =head1 VERSION
 
-version 2.027
+version 2.028
 
 =head1 SYNOPSIS
 
