@@ -89,7 +89,6 @@ eval { $v .= pmver('Log::Dispatchouli','any version') };
 eval { $v .= pmver('Module::Build','0.3601') };
 eval { $v .= pmver('Module::Runtime','any version') };
 eval { $v .= pmver('Moose','any version') };
-eval { $v .= pmver('Moose::Autobox','any version') };
 eval { $v .= pmver('Moose::Role','any version') };
 eval { $v .= pmver('Moose::Util::TypeConstraints','any version') };
 eval { $v .= pmver('MooseX::Has::Sugar','any version') };
